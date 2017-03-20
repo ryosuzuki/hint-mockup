@@ -38,7 +38,7 @@ class Answer extends Component {
 
   render() {
     return (
-      <div className="teacher">
+      <div id="answer" className="teacher">
         <h1 className="title">Teacher</h1>
         <h2>Answer</h2>
         <CodeMirror

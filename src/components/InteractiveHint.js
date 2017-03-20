@@ -57,7 +57,9 @@ class InteractiveHint extends Component {
             </div>
           </div>
           <div className="ui two column grid">
+            <button className="ui basic button" onClick={ () => { $('#ladder').toggle() } }>Hide Hint</button>
             <div className="sixteen wide column">
+
               <Ladder
                 beforeHistory={ this.props.beforeHistory }
                 afterHistory={ this.props.afterHistory }
@@ -94,6 +96,9 @@ class InteractiveHint extends Component {
             </div>
           </div>
         </div>
+        <button className="ui basic button" onClick={ () => { $('#answer').toggle() } }>Hide Answer</button>
+        <br/>
+
         <Answer
           options={ this.props.options }
           id={ this.props.id }

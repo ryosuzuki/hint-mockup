@@ -15,7 +15,7 @@ class Tree {
   }
 
   analyze(ast) {
-    if (ast.error) return false
+    if (!ast || ast.error) return false
     let body = ast.Module.body[0]
     let key = Object.keys(body)[0]
 

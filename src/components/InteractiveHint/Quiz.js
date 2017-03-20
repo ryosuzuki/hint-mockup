@@ -8,9 +8,6 @@ class Quiz extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      code: '',
-      origin: '',
-      startLine: 0,
       quizes: [],
       updates: [],
       ast: {},
@@ -25,7 +22,6 @@ class Quiz extends Component {
 
   init() {
     let line = this.props.line
-    let code = this.props.before.split('\n')[line-1].trim()
     let ast = this.props.beforeAst[line-1]
     let tree = new Tree()
     tree.history = this.props.history
@@ -39,11 +35,9 @@ class Quiz extends Component {
       // alert(`Error in updates number updates = ${tree.updates.length} quizes = ${tree.quizes.length}`)
     }
 
-    this.setState({
-      code: code,
-      origin: code,
-      startLine: line
-    })
+    if (tree.quizes.length === 0) {
+      $(`#why-${this.props.index}`).hide()
+    }
   }
 
   onChange(quiz, index, event) {
@@ -84,9 +78,9 @@ class Quiz extends Component {
     let item = this.props.history[key]
     if (item.children.length > 0) {
       return (
-        item.children.map((childKey) => {
+        item.children.map((childKey, index) => {
           return (
-            <div className="recursive">
+            <div className="recursive" key={ index }>
               <p><code>{ key }</code> calls <code>{ childKey }</code></p>
               <div style={{ marginLeft: '10px' }}>
               { this.renderChildren(childKey) }
@@ -187,19 +181,11 @@ class Quiz extends Component {
 
 
   render() {
-    const options = {
-      mode: 'python',
-      theme: 'base16-light',
-      lineNumbers: true,
-      firstLineNumber: this.state.startLine
-    }
-
-
     return (
       <div>
         { this.state.quizes.map((quiz, index) => {
           return (
-            <div id={ `q-${index}` } key={ index } style={{ display: index > this.state.index ? 'none' : 'block' }}>
+            <div id={ `q-${index}` } key={ index } style={{ display: index <= this.state.index ? 'block' : 'none' }}>
               { this.renderQuiz(quiz, index) }
             </div>
           )

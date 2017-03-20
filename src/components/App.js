@@ -106,7 +106,6 @@ class App extends Component {
       console.log('call init')
       window.interactiveHint.init()
       window.ladder.init()
-      window.quizes.map((quiz) => { quiz.init() })
 
       // window.locationHint.init()
       // window.transformationHint.init()
@@ -137,7 +136,7 @@ class App extends Component {
     return (
       <div>
         <div className="ui two column centered grid">
-          <div className="sixteen wide column">
+          <div className="fifteen wide column">
             <h1 id="top-title" className="ui center aligned huge header">
               Exploring the Design Space of Automated Hints -
               <a href="https://github.com/ryosuzuki/hint-mockup/" target="blank">
@@ -153,7 +152,7 @@ class App extends Component {
           </div>
         </div>
         <div className="ui two column centered grid">
-          <div id="mixed-hint" className="sixteen wide column">
+          <div id="mixed-hint" className="fifteen wide column">
             <h1 className="title">Student</h1>
             <InteractiveHint
               options={ options }

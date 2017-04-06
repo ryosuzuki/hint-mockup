@@ -1,0 +1,1196 @@
+[
+  {
+    "diffs": [
+      {
+        "count": 4, 
+        "value": "def g(n):\n    if n<=3:\n        return n\n    else:\n"
+      }, 
+      {
+        "count": 1, 
+        "removed": true, 
+        "value": "        return g(n-1)+(2*g(n-2))+(3*g(n-2))"
+      }, 
+      {
+        "count": 1, 
+        "added": true, 
+        "value": "        return g(n-1)+(2*g(n-2))+(3*g(n-3))"
+      }
+    ], 
+    "code": "def g(n):\n    if n<=3:\n        return n\n    else:\n        return g(n-1)+(2*g(n-2))+(3*g(n-2))\n        return g(n-1)+(2*g(n-2))+(3*g(n-3))\n", 
+    "afterCode": "def g(n):\n    if n<=3:\n        return n\n    else:\n        return g(n-1)+(2*g(n-2))+(3*g(n-3))\ng(4)", 
+    "log": ">>> g(4)\n13\n\n# Error: expected\n#     10\n# but got\n#     13", 
+    "addedLine": [
+      {
+        "line": 5, 
+        "code": "        return g(n-1)+(2*g(n-2))+(3*g(n-3))"
+      }
+    ], 
+    "afterAst": [
+      {
+        "error": true
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Name": {
+                    "ctx": "Load", 
+                    "id": "n"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "BinOp": {
+                    "op": "Add", 
+                    "right": {
+                      "BinOp": {
+                        "op": "Mult", 
+                        "right": {
+                          "Call": {
+                            "keywords": [], 
+                            "kwargs": null, 
+                            "args": [
+                              {
+                                "BinOp": {
+                                  "op": "Sub", 
+                                  "right": {
+                                    "Num": {
+                                      "n": 3
+                                    }
+                                  }, 
+                                  "left": {
+                                    "Name": {
+                                      "ctx": "Load", 
+                                      "id": "n"
+                                    }
+                                  }
+                                }
+                              }
+                            ], 
+                            "func": {
+                              "Name": {
+                                "ctx": "Load", 
+                                "id": "g"
+                              }
+                            }, 
+                            "starargs": null
+                          }
+                        }, 
+                        "left": {
+                          "Num": {
+                            "n": 3
+                          }
+                        }
+                      }
+                    }, 
+                    "left": {
+                      "BinOp": {
+                        "op": "Add", 
+                        "right": {
+                          "BinOp": {
+                            "op": "Mult", 
+                            "right": {
+                              "Call": {
+                                "keywords": [], 
+                                "kwargs": null, 
+                                "args": [
+                                  {
+                                    "BinOp": {
+                                      "op": "Sub", 
+                                      "right": {
+                                        "Num": {
+                                          "n": 2
+                                        }
+                                      }, 
+                                      "left": {
+                                        "Name": {
+                                          "ctx": "Load", 
+                                          "id": "n"
+                                        }
+                                      }
+                                    }
+                                  }
+                                ], 
+                                "func": {
+                                  "Name": {
+                                    "ctx": "Load", 
+                                    "id": "g"
+                                  }
+                                }, 
+                                "starargs": null
+                              }
+                            }, 
+                            "left": {
+                              "Num": {
+                                "n": 2
+                              }
+                            }
+                          }
+                        }, 
+                        "left": {
+                          "Call": {
+                            "keywords": [], 
+                            "kwargs": null, 
+                            "args": [
+                              {
+                                "BinOp": {
+                                  "op": "Sub", 
+                                  "right": {
+                                    "Num": {
+                                      "n": 1
+                                    }
+                                  }, 
+                                  "left": {
+                                    "Name": {
+                                      "ctx": "Load", 
+                                      "id": "n"
+                                    }
+                                  }
+                                }
+                              }
+                            ], 
+                            "func": {
+                              "Name": {
+                                "ctx": "Load", 
+                                "id": "g"
+                              }
+                            }, 
+                            "starargs": null
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ], 
+    "after": "def g(n):\n    if n<=3:\n        return n\n    else:\n        return g(n-1)+(2*g(n-2))+(3*g(n-3))", 
+    "beforeCode": "def g(n):\n    if n<=3:\n        return n\n    else:\n        return g(n-1)+(2*g(n-2))+(3*g(n-2))\ng(4)", 
+    "rule": "Apply(ast, Patch(EditMap(\\node => Update(node, LeafConstNode(ConstantExpressionNode-3)), Selected(\\x => Match(x, StartsWithTarget(Target(LeafWildcard(\"ConstantExpressionNode\")))), InOrderSort(ast)))))", 
+    "beforeTraces": [
+      {
+        "func_name": "<module>", 
+        "line": 1, 
+        "globals": {}, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 6, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "g", 
+        "line": 1, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 2, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 5, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 1, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 3
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 2, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 3
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 3
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "__return__": 3, 
+              "n": 3
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 1, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 2, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "__return__": 2, 
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 1, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 2, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "__return__": 2, 
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 5, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "__return__": 13, 
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 6, 
+        "globals": {
+          "g": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": []
+      }
+    ], 
+    "expected": 10, 
+    "afterTraces": [
+      {
+        "func_name": "<module>", 
+        "line": 1, 
+        "globals": {}, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 6, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "g", 
+        "line": 1, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 2, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 5, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 1, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 3
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 2, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 3
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 3
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "__return__": 3, 
+              "n": 3
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 1, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 2, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "__return__": 2, 
+              "n": 2
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 1, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 1
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 2, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 1
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "n": 1
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 3, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "__return__": 1, 
+              "n": 1
+            }
+          ], 
+          [
+            "g", 
+            {
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "g", 
+        "line": 5, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "g", 
+            {
+              "__return__": 10, 
+              "n": 4
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 6, 
+        "globals": {
+          "g": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": []
+      }
+    ], 
+    "studentId": 670, 
+    "result": 13, 
+    "removedLine": [
+      {
+        "line": 4, 
+        "code": "        return g(n-1)+(2*g(n-2))+(3*g(n-2))"
+      }
+    ], 
+    "test": "g(4)", 
+    "beforeAst": [
+      {
+        "error": true
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Name": {
+                    "ctx": "Load", 
+                    "id": "n"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "BinOp": {
+                    "op": "Add", 
+                    "right": {
+                      "BinOp": {
+                        "op": "Mult", 
+                        "right": {
+                          "Call": {
+                            "keywords": [], 
+                            "kwargs": null, 
+                            "args": [
+                              {
+                                "BinOp": {
+                                  "op": "Sub", 
+                                  "right": {
+                                    "Num": {
+                                      "n": 2
+                                    }
+                                  }, 
+                                  "left": {
+                                    "Name": {
+                                      "ctx": "Load", 
+                                      "id": "n"
+                                    }
+                                  }
+                                }
+                              }
+                            ], 
+                            "func": {
+                              "Name": {
+                                "ctx": "Load", 
+                                "id": "g"
+                              }
+                            }, 
+                            "starargs": null
+                          }
+                        }, 
+                        "left": {
+                          "Num": {
+                            "n": 3
+                          }
+                        }
+                      }
+                    }, 
+                    "left": {
+                      "BinOp": {
+                        "op": "Add", 
+                        "right": {
+                          "BinOp": {
+                            "op": "Mult", 
+                            "right": {
+                              "Call": {
+                                "keywords": [], 
+                                "kwargs": null, 
+                                "args": [
+                                  {
+                                    "BinOp": {
+                                      "op": "Sub", 
+                                      "right": {
+                                        "Num": {
+                                          "n": 2
+                                        }
+                                      }, 
+                                      "left": {
+                                        "Name": {
+                                          "ctx": "Load", 
+                                          "id": "n"
+                                        }
+                                      }
+                                    }
+                                  }
+                                ], 
+                                "func": {
+                                  "Name": {
+                                    "ctx": "Load", 
+                                    "id": "g"
+                                  }
+                                }, 
+                                "starargs": null
+                              }
+                            }, 
+                            "left": {
+                              "Num": {
+                                "n": 2
+                              }
+                            }
+                          }
+                        }, 
+                        "left": {
+                          "Call": {
+                            "keywords": [], 
+                            "kwargs": null, 
+                            "args": [
+                              {
+                                "BinOp": {
+                                  "op": "Sub", 
+                                  "right": {
+                                    "Num": {
+                                      "n": 1
+                                    }
+                                  }, 
+                                  "left": {
+                                    "Name": {
+                                      "ctx": "Load", 
+                                      "id": "n"
+                                    }
+                                  }
+                                }
+                              }
+                            ], 
+                            "func": {
+                              "Name": {
+                                "ctx": "Load", 
+                                "id": "g"
+                              }
+                            }, 
+                            "starargs": null
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ], 
+    "removed": [
+      4
+    ], 
+    "id": 0, 
+    "added": [
+      5
+    ], 
+    "before": "def g(n):\n    if n<=3:\n        return n\n    else:\n        return g(n-1)+(2*g(n-2))+(3*g(n-2))"
+  }
+]

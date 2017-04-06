@@ -3,9 +3,19 @@ const jsdiff = require('diff')
 const PythonShell = require('python-shell')
 
 const main = () => {
-  const trace = new Trace()
-  trace.open('accumulate_all_attempts.json')
-  trace.generate('accumulate.json')
+  const args = process.argv.slice(2)
+  const type = args[0]
+  const types = ['accumulate', 'g', 'product', 'repeated']
+  if (types.includes(type)) {
+    console.log(type)
+    const trace = new Trace()
+    trace.open(type)
+    trace.generate(type)
+  } else {
+    console.log(`${type} is not available`)
+    console.log(`available args:`)
+    console.log(types)
+  }
 }
 
 class Trace {
@@ -14,12 +24,17 @@ class Trace {
     this.results = []
   }
 
-  open(path) {
+  open(type) {
+    const path = `${type}_all_attempts.json`
+    console.log(`parse ${path}`)
     const json = fs.readFileSync(path, 'utf8')
     this.items = JSON.parse(json)
   }
 
-  generate(path) {
+  generate(type) {
+    const path = `${type}.json`
+    console.log(`generating ${path}`)
+
     let results = []
     let id = 0
     for (let item of this.items) {
@@ -29,8 +44,8 @@ class Trace {
     }
     fs.writeFileSync(path, JSON.stringify(this.results, null, 2))
     console.log('write finish')
-
-    PythonShell.run('get_trace.py', { args: [path] }, (err) => {
+    console.log('analyzing behavior...')
+    PythonShell.run('get_trace.py', { args: [type] }, (err) => {
       if (err) throw err
       console.log('generate finish')
     })

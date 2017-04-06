@@ -39,6 +39,10 @@ class Tree {
     for (let target of el.targets) {
       let tn = this.addNode(target)
       left.push(tn)
+
+      if (!_.last(this.quizes)) debugger
+
+
       if (_.last(this.quizes).key === tn.key) this.quizes.pop()
     }
     let key = left.map(target => target.key).join(', ')
@@ -233,7 +237,7 @@ class Tree {
     for (let lu of left.updates) {
       updates.push(`${lu} ${operator[op]} ${right.origin}`)
     }
-    for (let rh of right.updates) {
+    for (let ru of right.updates) {
       let update = `${left.value} ${operator[op]} ${ru}`
       if (!updates.includes(update)) {
         updates.push(update)

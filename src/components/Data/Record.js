@@ -108,6 +108,7 @@ class Record {
     }
     let key = this.getKey(func, args)
     let value = trace.locals[func]['__return__']
+
     this.history[key]['value'] = value
     this.history[key]['history'] = [value]
     this.history[key]['line'] = trace.line
@@ -181,6 +182,12 @@ class Record {
     // o helper(add, 0, identity)
     if (func === 'accumulate') {
       const ks = ['combiner', 'base', 'n', 'term']
+      return `${func}(${ks.map(k => args[k]).join(', ')})`
+    } else if (func === 'product') {
+      const ks = ['n', 'term']
+      return `${func}(${ks.map(k => args[k]).join(', ')})`
+    } else if (func === 'g') {
+      const ks = ['n']
       return `${func}(${ks.map(k => args[k]).join(', ')})`
     } else {
       return `${func}(${Object.values(args).join(', ')})`

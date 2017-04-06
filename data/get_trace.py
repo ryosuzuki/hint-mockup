@@ -5,7 +5,8 @@ import pg_logger
 import json
 import parse
 
-path = sys.argv[1]
+question_type = sys.argv[1]
+path = question_type + '.json'
 
 items = []
 with open(path) as file:
@@ -25,7 +26,6 @@ for item in items:
       ast = parse.make_ast(line)
     except Exception as err:
       ast = { 'error': True }
-    print line
     before_ast.append(ast)
 
   for line in after.splitlines():
@@ -57,7 +57,7 @@ for item in items:
 
   key = keywords[0]
   if key == 'product':
-    term = keywords[1]
+    term = keywords[2]
   elif key == 'accumulate':
     combiner = keywords[1]
     term = keywords[4]
@@ -95,7 +95,9 @@ for item in items:
   item['beforeTraces'] = beforeTraces
   item['afterTraces'] = afterTraces
 
-with open('example.json', 'w') as file:
+
+
+with open(question_type + '_example.json', 'w') as file:
   json.dump([items[0]], file, indent = 2)
 
 with open(path, 'w') as file:

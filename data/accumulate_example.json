@@ -1,0 +1,3008 @@
+[
+  {
+    "diffs": [
+      {
+        "count": 1, 
+        "value": "def accumulate(combiner, base, n, term):\n"
+      }, 
+      {
+        "count": 1, 
+        "removed": true, 
+        "value": "    previous = term(base)\n"
+      }, 
+      {
+        "count": 1, 
+        "added": true, 
+        "value": "    previous = base\n"
+      }, 
+      {
+        "count": 3, 
+        "value": "    for i in range(1, n+1):\n        previous = combiner(previous, term(i))\n    return previous"
+      }
+    ], 
+    "code": "def accumulate(combiner, base, n, term):\n    previous = term(base)\n    previous = base\n    for i in range(1, n+1):\n        previous = combiner(previous, term(i))\n    return previous\n", 
+    "afterCode": "def accumulate(combiner, base, n, term):\n    previous = base\n    for i in range(1, n+1):\n        previous = combiner(previous, term(i))\n    return previous\n\ndef add(a, b):\n  return a + b\n\ndef square(x):\n  return x * x\n\naccumulate(add, 11, 3, square)", 
+    "log": ">>> accumulate(add, 11, 3, square)   # 11 + 1^2 + 2^2 + 3^2\n135\n\n# Error: expected\n#     25\n# but got\n#     135", 
+    "addedLine": [
+      {
+        "line": 2, 
+        "code": "    previous = base"
+      }
+    ], 
+    "afterAst": [
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Assign": {
+                "targets": [
+                  {
+                    "Name": {
+                      "ctx": "Store", 
+                      "id": "previous"
+                    }
+                  }
+                ], 
+                "value": {
+                  "Name": {
+                    "ctx": "Load", 
+                    "id": "base"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Assign": {
+                "targets": [
+                  {
+                    "Name": {
+                      "ctx": "Store", 
+                      "id": "previous"
+                    }
+                  }
+                ], 
+                "value": {
+                  "Call": {
+                    "keywords": [], 
+                    "kwargs": null, 
+                    "args": [
+                      {
+                        "Name": {
+                          "ctx": "Load", 
+                          "id": "previous"
+                        }
+                      }, 
+                      {
+                        "Call": {
+                          "keywords": [], 
+                          "kwargs": null, 
+                          "args": [
+                            {
+                              "Name": {
+                                "ctx": "Load", 
+                                "id": "i"
+                              }
+                            }
+                          ], 
+                          "func": {
+                            "Name": {
+                              "ctx": "Load", 
+                              "id": "term"
+                            }
+                          }, 
+                          "starargs": null
+                        }
+                      }
+                    ], 
+                    "func": {
+                      "Name": {
+                        "ctx": "Load", 
+                        "id": "combiner"
+                      }
+                    }, 
+                    "starargs": null
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Name": {
+                    "ctx": "Load", 
+                    "id": "previous"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ], 
+    "after": "def accumulate(combiner, base, n, term):\n    previous = base\n    for i in range(1, n+1):\n        previous = combiner(previous, term(i))\n    return previous", 
+    "beforeCode": "def accumulate(combiner, base, n, term):\n    previous = term(base)\n    for i in range(1, n+1):\n        previous = combiner(previous, term(i))\n    return previous\n\ndef add(a, b):\n  return a + b\n\ndef square(x):\n  return x * x\n\naccumulate(add, 11, 3, square)", 
+    "rule": "Apply(ast, CPatch(EditMap(\\node => Delete(node, ReferenceNode(node, StartsWithParent(Node(AssignmentStatementNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Target(Node(CallExpressionNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\"))))))))))), Tutor.synthesis.MagicK)), Selected(\\x => Match(x, StartsWithTarget(Target(Node(AssignmentStatementNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(CallExpressionNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\")))))))))))), InOrderSort(ast))), Patch(EditMap(\\node => Move(node, ReferenceNode(node, StartsWithParent(Node(ArgNode, TChild(Target(LeafWildcard(\"NameExpressionNode\"))))), Tutor.synthesis.MagicK), 1), Selected(\\x => Match(x, StartsWithTarget(Target(Node(AssignmentStatementNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(CallExpressionNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\")))))))))))), InOrderSort(ast))))))", 
+    "beforeTraces": [
+      {
+        "func_name": "<module>", 
+        "line": 1, 
+        "globals": {}, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 7, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 10, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 13, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 1, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 2, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 10, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 11
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 11
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "__return__": 121, 
+              "x": 11
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 3, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "previous": 121, 
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 4, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 10, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "__return__": 1, 
+              "x": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 7, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 121, 
+              "b": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 121, 
+              "b": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 121, 
+              "__return__": 122, 
+              "b": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 3, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 4, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 10, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 2
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 2
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "__return__": 4, 
+              "x": 2
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 7, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 122, 
+              "b": 4
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 122, 
+              "b": 4
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 122, 
+              "__return__": 126, 
+              "b": 4
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 3, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 4, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 10, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 3
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 3
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "__return__": 9, 
+              "x": 3
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 7, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 126, 
+              "b": 9
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 126, 
+              "b": 9
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 126, 
+              "__return__": 135, 
+              "b": 9
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 3, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 135
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 5, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 135
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 5, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "__return__": 135, 
+              "previous": 135
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 13, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": []
+      }
+    ], 
+    "expected": 25, 
+    "afterTraces": [
+      {
+        "func_name": "<module>", 
+        "line": 1, 
+        "globals": {}, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 7, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 10, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 13, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 1, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 2, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 3, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "previous": 11, 
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 4, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 10, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "__return__": 1, 
+              "x": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 7, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 11, 
+              "b": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 11, 
+              "b": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 11, 
+              "__return__": 12, 
+              "b": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 3, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 4, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 10, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 2
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 2
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "__return__": 4, 
+              "x": 2
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 7, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 12, 
+              "b": 4
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 12, 
+              "b": 4
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 12, 
+              "__return__": 16, 
+              "b": 4
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 3, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 4, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 10, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 3
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 3
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "square", 
+        "line": 11, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "square", 
+            {
+              "__return__": 9, 
+              "x": 3
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 7, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 16, 
+              "b": 9
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 16, 
+              "b": 9
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "add", 
+        "line": 8, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 16, 
+              "__return__": 25, 
+              "b": 9
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 3, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 25
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 5, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 25
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "accumulate", 
+        "line": 5, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                6
+              ], 
+              "combiner": [
+                "REF", 
+                5
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "__return__": 25, 
+              "previous": 25
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 13, 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            4
+          ], 
+          "add": [
+            "REF", 
+            5
+          ], 
+          "square": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": []
+      }
+    ], 
+    "studentId": 384, 
+    "result": 135, 
+    "removedLine": [
+      {
+        "line": 1, 
+        "code": "    previous = term(base)"
+      }
+    ], 
+    "test": "accumulate(add, 11, 3, square)", 
+    "beforeAst": [
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Assign": {
+                "targets": [
+                  {
+                    "Name": {
+                      "ctx": "Store", 
+                      "id": "previous"
+                    }
+                  }
+                ], 
+                "value": {
+                  "Call": {
+                    "keywords": [], 
+                    "kwargs": null, 
+                    "args": [
+                      {
+                        "Name": {
+                          "ctx": "Load", 
+                          "id": "base"
+                        }
+                      }
+                    ], 
+                    "func": {
+                      "Name": {
+                        "ctx": "Load", 
+                        "id": "term"
+                      }
+                    }, 
+                    "starargs": null
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Assign": {
+                "targets": [
+                  {
+                    "Name": {
+                      "ctx": "Store", 
+                      "id": "previous"
+                    }
+                  }
+                ], 
+                "value": {
+                  "Call": {
+                    "keywords": [], 
+                    "kwargs": null, 
+                    "args": [
+                      {
+                        "Name": {
+                          "ctx": "Load", 
+                          "id": "previous"
+                        }
+                      }, 
+                      {
+                        "Call": {
+                          "keywords": [], 
+                          "kwargs": null, 
+                          "args": [
+                            {
+                              "Name": {
+                                "ctx": "Load", 
+                                "id": "i"
+                              }
+                            }
+                          ], 
+                          "func": {
+                            "Name": {
+                              "ctx": "Load", 
+                              "id": "term"
+                            }
+                          }, 
+                          "starargs": null
+                        }
+                      }
+                    ], 
+                    "func": {
+                      "Name": {
+                        "ctx": "Load", 
+                        "id": "combiner"
+                      }
+                    }, 
+                    "starargs": null
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Name": {
+                    "ctx": "Load", 
+                    "id": "previous"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ], 
+    "removed": [
+      1
+    ], 
+    "id": 0, 
+    "added": [
+      2
+    ], 
+    "before": "def accumulate(combiner, base, n, term):\n    previous = term(base)\n    for i in range(1, n+1):\n        previous = combiner(previous, term(i))\n    return previous"
+  }
+]

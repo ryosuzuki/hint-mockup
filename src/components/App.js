@@ -51,6 +51,8 @@ class App extends Component {
     .then((items) => {
       console.log('start')
       window.type = params.type
+
+      $(`#type-links #${params.type}`).addClass('primary')
       const id = Number(params.id)
       this.updateState({ items: items })
       this.setCurrent(id)
@@ -156,6 +158,12 @@ class App extends Component {
                 <i className="fa fa-fw fa-github-alt"></i> GitHub
               </a>
             </h1>
+          </div>
+          <div id="type-links" className="six wide column">
+            <a id="accumulate" className="ui basic button" href="?type=accumulate&id=0">accumulate</a>
+            <a id="product" className="ui basic button" href="?type=product&id=0">product</a>
+            <a id="g" className="ui basic button" href="?type=g&id=0">g</a>
+            <a id="repeated" className="ui basic button" href="?type=repeated&id=0">repeated</a>
           </div>
           <div id="control-panel" className="eight wide column">
             <ControlPanel

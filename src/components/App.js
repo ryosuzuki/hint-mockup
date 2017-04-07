@@ -39,6 +39,10 @@ class App extends Component {
     )
 
     const types = ['accumulate', 'product', 'g', 'repeated']
+    if (!params.type && params.id) {
+      window.location.href = `/?type=accumulate&id=${params.id}`
+      return false
+    }
     if (!params.type || !params.id || !types.includes(params.type)) {
       window.location.href = '/?type=accumulate&id=0'
       return false

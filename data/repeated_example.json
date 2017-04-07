@@ -5784,7 +5784,7 @@
       }
     ], 
     "studentId": 654, 
-    "result": null, 
+    "result": "NameError", 
     "removedLine": [
       {
         "line": 3, 

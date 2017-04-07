@@ -128,7 +128,7 @@ class Item {
     let pass = parseInt(this.item.failed[this.item.failed.length-2])
     let test = this.item.failed[testIndex]
     test = test.substr(4)
-    test = test.substr(0, test.indexOf(')') + 1)
+    // test = test.substr(0, test.indexOf(')') + 1)
     let expected = this.item.failed[errorIndex+1]
     expected = parseInt(expected.substr(1))
     let result = this.item.failed[errorIndex+3]

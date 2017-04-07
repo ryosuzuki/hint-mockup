@@ -21,7 +21,7 @@
       }
     ], 
     "code": "def accumulate(combiner, base, n, term):\n    previous = term(base)\n    previous = base\n    for i in range(1, n+1):\n        previous = combiner(previous, term(i))\n    return previous\n", 
-    "afterCode": "def accumulate(combiner, base, n, term):\n    previous = base\n    for i in range(1, n+1):\n        previous = combiner(previous, term(i))\n    return previous\n\ndef add(a, b):\n  return a + b\n\ndef square(x):\n  return x * x\n\naccumulate(add, 11, 3, square)", 
+    "afterCode": "def accumulate(combiner, base, n, term):\n  previous = base\n  for i in range(1, n+1):\n    previous = combiner(previous, term(i))\n  return previous\n\ndef add(a, b):\n  return a + b\n\ndef square(x):\n  return x * x\n\naccumulate(add, 11, 3, square)   ", 
     "log": ">>> accumulate(add, 11, 3, square)   # 11 + 1^2 + 2^2 + 3^2\n135\n\n# Error: expected\n#     25\n# but got\n#     135", 
     "addedLine": [
       {
@@ -138,67 +138,52 @@
       }
     ], 
     "after": "def accumulate(combiner, base, n, term):\n    previous = base\n    for i in range(1, n+1):\n        previous = combiner(previous, term(i))\n    return previous", 
-    "beforeCode": "def accumulate(combiner, base, n, term):\n    previous = term(base)\n    for i in range(1, n+1):\n        previous = combiner(previous, term(i))\n    return previous\n\ndef add(a, b):\n  return a + b\n\ndef square(x):\n  return x * x\n\naccumulate(add, 11, 3, square)", 
+    "beforeCode": "def accumulate(combiner, base, n, term):\n  previous = term(base)\n  for i in range(1, n+1):\n    previous = combiner(previous, term(i))\n  return previous\n\ndef add(a, b):\n  return a + b\n\ndef square(x):\n  return x * x\n\naccumulate(add, 11, 3, square)   ", 
     "rule": "Apply(ast, CPatch(EditMap(\\node => Delete(node, ReferenceNode(node, StartsWithParent(Node(AssignmentStatementNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Target(Node(CallExpressionNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\"))))))))))), Tutor.synthesis.MagicK)), Selected(\\x => Match(x, StartsWithTarget(Target(Node(AssignmentStatementNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(CallExpressionNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\")))))))))))), InOrderSort(ast))), Patch(EditMap(\\node => Move(node, ReferenceNode(node, StartsWithParent(Node(ArgNode, TChild(Target(LeafWildcard(\"NameExpressionNode\"))))), Tutor.synthesis.MagicK), 1), Selected(\\x => Match(x, StartsWithTarget(Target(Node(AssignmentStatementNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(CallExpressionNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\")))))))))))), InOrderSort(ast))))))", 
     "beforeTraces": [
       {
+        "ordered_globals": [], 
+        "stdout": "", 
         "func_name": "<module>", 
-        "line": 1, 
+        "stack_to_render": [], 
         "globals": {}, 
-        "event": "step_line", 
-        "stack_locals": []
-      }, 
-      {
-        "func_name": "<module>", 
-        "line": 7, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            1
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": []
-      }, 
-      {
-        "func_name": "<module>", 
-        "line": 10, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            1
-          ], 
-          "add": [
-            "REF", 
-            2
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": []
-      }, 
-      {
-        "func_name": "<module>", 
-        "line": 13, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            1
-          ], 
-          "add": [
-            "REF", 
-            2
-          ], 
-          "square": [
-            "REF", 
-            3
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": []
-      }, 
-      {
-        "func_name": "accumulate", 
+        "heap": {}, 
+        "stack_locals": [], 
         "line": 1, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate"
+        ], 
+        "stdout": "", 
+        "func_name": "<module>", 
+        "stack_to_render": [], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ]
+        }, 
+        "stack_locals": [], 
+        "line": 7, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add"
+        ], 
+        "stdout": "", 
+        "func_name": "<module>", 
+        "stack_to_render": [], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -207,70 +192,33 @@
           "add": [
             "REF", 
             2
-          ], 
-          "square": [
-            "REF", 
-            3
           ]
         }, 
-        "event": "call", 
-        "stack_locals": [
-          [
-            "accumulate", 
-            {
-              "term": [
-                "REF", 
-                3
-              ], 
-              "combiner": [
-                "REF", 
-                2
-              ], 
-              "base": 11, 
-              "n": 3
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "accumulate", 
-        "line": 2, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            1
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
           ], 
-          "add": [
-            "REF", 
-            2
-          ], 
-          "square": [
-            "REF", 
-            3
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
           ]
         }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "accumulate", 
-            {
-              "term": [
-                "REF", 
-                3
-              ], 
-              "combiner": [
-                "REF", 
-                2
-              ], 
-              "base": 11, 
-              "n": 3
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
+        "stack_locals": [], 
         "line": 10, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "<module>", 
+        "stack_to_render": [], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -285,7 +233,286 @@
             3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [], 
+        "line": 13, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ], 
+        "line": 1, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ], 
+        "line": 2, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term"
+            ]
+          }, 
+          {
+            "frame_id": 2, 
+            "encoded_locals": {
+              "x": 11
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f2", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -308,11 +535,62 @@
               "n": 3
             }
           ]
-        ]
+        ], 
+        "line": 10, 
+        "event": "call"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "square", 
-        "line": 11, 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term"
+            ]
+          }, 
+          {
+            "frame_id": 2, 
+            "encoded_locals": {
+              "x": 11
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f2", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -327,7 +605,23 @@
             3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -350,11 +644,64 @@
               "n": 3
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "square", 
-        "line": 11, 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term"
+            ]
+          }, 
+          {
+            "frame_id": 2, 
+            "encoded_locals": {
+              "__return__": 121, 
+              "x": 11
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f2", 
+            "ordered_varnames": [
+              "x", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -369,7 +716,23 @@
             3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -393,11 +756,49 @@
               "n": 3
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
-        "line": 3, 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "previous": 121, 
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -412,7 +813,23 @@
             3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "accumulate", 
@@ -430,11 +847,160 @@
               "n": 3
             }
           ]
-        ]
+        ], 
+        "line": 3, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }
+          ]
+        ], 
         "line": 4, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 3, 
+            "encoded_locals": {
+              "x": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f3", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -449,8 +1015,30 @@
             3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 1
+            }
+          ], 
           [
             "accumulate", 
             {
@@ -468,11 +1056,66 @@
               "previous": 121
             }
           ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
+        ], 
         "line": 10, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 3, 
+            "encoded_locals": {
+              "x": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f3", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -487,7 +1130,23 @@
             3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -512,36 +1171,22 @@
               "previous": 121
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "square", 
-        "line": 11, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            1
-          ], 
-          "add": [
-            "REF", 
-            2
-          ], 
-          "square": [
-            "REF", 
-            3
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "square", 
-            {
-              "x": 1
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
                 3
@@ -554,13 +1199,40 @@
               "n": 3, 
               "base": 11, 
               "previous": 121
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
-        "line": 11, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 3, 
+            "encoded_locals": {
+              "__return__": 1, 
+              "x": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f3", 
+            "ordered_varnames": [
+              "x", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -575,7 +1247,23 @@
             3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -601,11 +1289,186 @@
               "previous": 121
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 4, 
+            "encoded_locals": {
+              "a": 121, 
+              "b": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f4", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 121, 
+              "b": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }
+          ]
+        ], 
         "line": 7, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 121
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 4, 
+            "encoded_locals": {
+              "a": 121, 
+              "b": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f4", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -620,7 +1483,23 @@
             3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -646,37 +1525,22 @@
               "previous": 121
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
-        "line": 8, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            1
-          ], 
-          "add": [
-            "REF", 
-            2
-          ], 
-          "square": [
-            "REF", 
-            3
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "add", 
-            {
-              "a": 121, 
-              "b": 1
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
                 3
@@ -689,13 +1553,42 @@
               "n": 3, 
               "base": 11, 
               "previous": 121
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "add", 
-        "line": 8, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 4, 
+            "encoded_locals": {
+              "a": 121, 
+              "__return__": 122, 
+              "b": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f4", 
+            "ordered_varnames": [
+              "a", 
+              "b", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -710,7 +1603,23 @@
             3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -737,11 +1646,51 @@
               "previous": 121
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
-        "line": 3, 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -756,7 +1705,23 @@
             3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "accumulate", 
@@ -775,11 +1740,160 @@
               "previous": 122
             }
           ]
-        ]
+        ], 
+        "line": 3, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }
+          ]
+        ], 
         "line": 4, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 5, 
+            "encoded_locals": {
+              "x": 2
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f5", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -794,8 +1908,30 @@
             3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 2
+            }
+          ], 
           [
             "accumulate", 
             {
@@ -813,11 +1949,66 @@
               "previous": 122
             }
           ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
+        ], 
         "line": 10, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 5, 
+            "encoded_locals": {
+              "x": 2
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f5", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -832,7 +2023,23 @@
             3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -857,36 +2064,22 @@
               "previous": 122
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "square", 
-        "line": 11, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            1
-          ], 
-          "add": [
-            "REF", 
-            2
-          ], 
-          "square": [
-            "REF", 
-            3
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "square", 
-            {
-              "x": 2
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
                 3
@@ -899,13 +2092,40 @@
               "n": 3, 
               "base": 11, 
               "previous": 122
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
-        "line": 11, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 5, 
+            "encoded_locals": {
+              "__return__": 4, 
+              "x": 2
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f5", 
+            "ordered_varnames": [
+              "x", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -920,7 +2140,23 @@
             3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -946,11 +2182,186 @@
               "previous": 122
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 6, 
+            "encoded_locals": {
+              "a": 122, 
+              "b": 4
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f6", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 122, 
+              "b": 4
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }
+          ]
+        ], 
         "line": 7, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 122
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 6, 
+            "encoded_locals": {
+              "a": 122, 
+              "b": 4
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f6", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -965,7 +2376,23 @@
             3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -991,37 +2418,22 @@
               "previous": 122
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
-        "line": 8, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            1
-          ], 
-          "add": [
-            "REF", 
-            2
-          ], 
-          "square": [
-            "REF", 
-            3
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "add", 
-            {
-              "a": 122, 
-              "b": 4
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
                 3
@@ -1034,13 +2446,42 @@
               "n": 3, 
               "base": 11, 
               "previous": 122
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "add", 
-        "line": 8, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 6, 
+            "encoded_locals": {
+              "a": 122, 
+              "__return__": 126, 
+              "b": 4
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f6", 
+            "ordered_varnames": [
+              "a", 
+              "b", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -1055,7 +2496,23 @@
             3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -1082,11 +2539,51 @@
               "previous": 122
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
-        "line": 3, 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -1101,7 +2598,23 @@
             3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "accumulate", 
@@ -1120,11 +2633,160 @@
               "previous": 126
             }
           ]
-        ]
+        ], 
+        "line": 3, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }
+          ]
+        ], 
         "line": 4, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 7, 
+            "encoded_locals": {
+              "x": 3
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f7", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -1139,8 +2801,30 @@
             3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 3
+            }
+          ], 
           [
             "accumulate", 
             {
@@ -1158,11 +2842,66 @@
               "previous": 126
             }
           ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
+        ], 
         "line": 10, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 7, 
+            "encoded_locals": {
+              "x": 3
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f7", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -1177,7 +2916,23 @@
             3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -1202,36 +2957,22 @@
               "previous": 126
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "square", 
-        "line": 11, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            1
-          ], 
-          "add": [
-            "REF", 
-            2
-          ], 
-          "square": [
-            "REF", 
-            3
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "square", 
-            {
-              "x": 3
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
                 3
@@ -1244,13 +2985,40 @@
               "n": 3, 
               "base": 11, 
               "previous": 126
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
-        "line": 11, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 7, 
+            "encoded_locals": {
+              "__return__": 9, 
+              "x": 3
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f7", 
+            "ordered_varnames": [
+              "x", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -1265,7 +3033,23 @@
             3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -1291,11 +3075,186 @@
               "previous": 126
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 8, 
+            "encoded_locals": {
+              "a": 126, 
+              "b": 9
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f8", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 126, 
+              "b": 9
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }
+          ]
+        ], 
         "line": 7, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 126
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 8, 
+            "encoded_locals": {
+              "a": 126, 
+              "b": 9
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f8", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -1310,7 +3269,23 @@
             3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -1336,37 +3311,22 @@
               "previous": 126
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
-        "line": 8, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            1
-          ], 
-          "add": [
-            "REF", 
-            2
-          ], 
-          "square": [
-            "REF", 
-            3
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "add", 
-            {
-              "a": 126, 
-              "b": 9
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
                 3
@@ -1379,13 +3339,42 @@
               "n": 3, 
               "base": 11, 
               "previous": 126
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "add", 
-        "line": 8, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 8, 
+            "encoded_locals": {
+              "a": 126, 
+              "__return__": 135, 
+              "b": 9
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f8", 
+            "ordered_varnames": [
+              "a", 
+              "b", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -1400,7 +3389,23 @@
             3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -1427,11 +3432,145 @@
               "previous": 126
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 135
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 135
+            }
+          ]
+        ], 
         "line": 3, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 135
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -1446,7 +3585,23 @@
             3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "accumulate", 
@@ -1465,30 +3620,22 @@
               "previous": 135
             }
           ]
-        ]
+        ], 
+        "line": 5, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
-        "line": 5, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            1
-          ], 
-          "add": [
-            "REF", 
-            2
-          ], 
-          "square": [
-            "REF", 
-            3
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
                 3
@@ -1500,14 +3647,26 @@
               "i": 3, 
               "n": 3, 
               "base": 11, 
+              "__return__": 135, 
               "previous": 135
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "accumulate", 
-        "line": 5, 
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -1522,7 +3681,23 @@
             3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "accumulate", 
@@ -1542,11 +3717,19 @@
               "previous": 135
             }
           ]
-        ]
+        ], 
+        "line": 5, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "<module>", 
-        "line": 13, 
+        "stack_to_render": [], 
         "globals": {
           "accumulate": [
             "REF", 
@@ -1561,157 +3744,389 @@
             3
           ]
         }, 
-        "event": "return", 
-        "stack_locals": []
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [], 
+        "line": 13, 
+        "event": "return"
       }
     ], 
     "expected": 25, 
     "afterTraces": [
       {
+        "ordered_globals": [], 
+        "stdout": "", 
         "func_name": "<module>", 
-        "line": 1, 
+        "stack_to_render": [], 
         "globals": {}, 
-        "event": "step_line", 
-        "stack_locals": []
-      }, 
-      {
-        "func_name": "<module>", 
-        "line": 7, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            4
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": []
-      }, 
-      {
-        "func_name": "<module>", 
-        "line": 10, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            4
-          ], 
-          "add": [
-            "REF", 
-            5
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": []
-      }, 
-      {
-        "func_name": "<module>", 
-        "line": 13, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            4
-          ], 
-          "add": [
-            "REF", 
-            5
-          ], 
-          "square": [
-            "REF", 
-            6
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": []
-      }, 
-      {
-        "func_name": "accumulate", 
+        "heap": {}, 
+        "stack_locals": [], 
         "line": 1, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate"
+        ], 
+        "stdout": "", 
+        "func_name": "<module>", 
+        "stack_to_render": [], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ]
+        }, 
+        "stack_locals": [], 
+        "line": 7, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add"
+        ], 
+        "stdout": "", 
+        "func_name": "<module>", 
+        "stack_to_render": [], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ]
+        }, 
+        "stack_locals": [], 
+        "line": 10, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "<module>", 
+        "stack_to_render": [], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [], 
+        "line": 13, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "accumulate", 
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "base": 11, 
               "n": 3
             }
           ]
-        ]
+        ], 
+        "line": 1, 
+        "event": "call"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "base": 11, 
+              "n": 3
+            }
+          ]
+        ], 
         "line": 2, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            4
-          ], 
-          "add": [
-            "REF", 
-            5
-          ], 
-          "square": [
-            "REF", 
-            6
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "accumulate", 
-            {
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "previous": 11, 
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "base": 11, 
               "n": 3
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "accumulate", 
-        "line": 3, 
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "accumulate", 
@@ -1719,47 +4134,218 @@
               "previous": 11, 
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "base": 11, 
               "n": 3
             }
           ]
-        ]
+        ], 
+        "line": 3, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }
+          ]
+        ], 
         "line": 4, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 2, 
+            "encoded_locals": {
+              "x": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f2", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 1
+            }
+          ], 
           [
             "accumulate", 
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 1, 
               "n": 3, 
@@ -1767,26 +4353,97 @@
               "previous": 11
             }
           ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
+        ], 
         "line": 10, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 2, 
+            "encoded_locals": {
+              "x": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f2", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -1799,11 +4456,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 1, 
               "n": 3, 
@@ -1811,70 +4468,99 @@
               "previous": 11
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "square", 
-        "line": 11, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            4
-          ], 
-          "add": [
-            "REF", 
-            5
-          ], 
-          "square": [
-            "REF", 
-            6
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "square", 
-            {
-              "x": 1
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 1, 
               "n": 3, 
               "base": 11, 
               "previous": 11
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
-        "line": 11, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 2, 
+            "encoded_locals": {
+              "__return__": 1, 
+              "x": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f2", 
+            "ordered_varnames": [
+              "x", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -1888,11 +4574,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 1, 
               "n": 3, 
@@ -1900,26 +4586,217 @@
               "previous": 11
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 3, 
+            "encoded_locals": {
+              "a": 11, 
+              "b": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f3", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 11, 
+              "b": 1
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }
+          ]
+        ], 
         "line": 7, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 11
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 3, 
+            "encoded_locals": {
+              "a": 11, 
+              "b": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f3", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -1933,11 +4810,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 1, 
               "n": 3, 
@@ -1945,71 +4822,101 @@
               "previous": 11
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
-        "line": 8, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            4
-          ], 
-          "add": [
-            "REF", 
-            5
-          ], 
-          "square": [
-            "REF", 
-            6
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "add", 
-            {
-              "a": 11, 
-              "b": 1
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 1, 
               "n": 3, 
               "base": 11, 
               "previous": 11
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "add", 
-        "line": 8, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 3, 
+            "encoded_locals": {
+              "a": 11, 
+              "__return__": 12, 
+              "b": 1
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f3", 
+            "ordered_varnames": [
+              "a", 
+              "b", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -2024,11 +4931,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 1, 
               "n": 3, 
@@ -2036,37 +4943,93 @@
               "previous": 11
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
-        "line": 3, 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 1, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "accumulate", 
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 1, 
               "n": 3, 
@@ -2074,37 +5037,208 @@
               "previous": 12
             }
           ]
-        ]
+        ], 
+        "line": 3, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }
+          ]
+        ], 
         "line": 4, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 4, 
+            "encoded_locals": {
+              "x": 2
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f4", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 2
+            }
+          ], 
           [
             "accumulate", 
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 2, 
               "n": 3, 
@@ -2112,26 +5246,97 @@
               "previous": 12
             }
           ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
+        ], 
         "line": 10, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 4, 
+            "encoded_locals": {
+              "x": 2
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f4", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -2144,11 +5349,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 2, 
               "n": 3, 
@@ -2156,70 +5361,99 @@
               "previous": 12
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "square", 
-        "line": 11, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            4
-          ], 
-          "add": [
-            "REF", 
-            5
-          ], 
-          "square": [
-            "REF", 
-            6
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "square", 
-            {
-              "x": 2
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 2, 
               "n": 3, 
               "base": 11, 
               "previous": 12
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
-        "line": 11, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 4, 
+            "encoded_locals": {
+              "__return__": 4, 
+              "x": 2
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f4", 
+            "ordered_varnames": [
+              "x", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -2233,11 +5467,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 2, 
               "n": 3, 
@@ -2245,26 +5479,217 @@
               "previous": 12
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 5, 
+            "encoded_locals": {
+              "a": 12, 
+              "b": 4
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f5", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 12, 
+              "b": 4
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }
+          ]
+        ], 
         "line": 7, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 12
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 5, 
+            "encoded_locals": {
+              "a": 12, 
+              "b": 4
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f5", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -2278,11 +5703,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 2, 
               "n": 3, 
@@ -2290,71 +5715,101 @@
               "previous": 12
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
-        "line": 8, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            4
-          ], 
-          "add": [
-            "REF", 
-            5
-          ], 
-          "square": [
-            "REF", 
-            6
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "add", 
-            {
-              "a": 12, 
-              "b": 4
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 2, 
               "n": 3, 
               "base": 11, 
               "previous": 12
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "add", 
-        "line": 8, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 5, 
+            "encoded_locals": {
+              "a": 12, 
+              "__return__": 16, 
+              "b": 4
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f5", 
+            "ordered_varnames": [
+              "a", 
+              "b", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -2369,11 +5824,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 2, 
               "n": 3, 
@@ -2381,37 +5836,93 @@
               "previous": 12
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
-        "line": 3, 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 2, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "accumulate", 
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 2, 
               "n": 3, 
@@ -2419,37 +5930,208 @@
               "previous": 16
             }
           ]
-        ]
+        ], 
+        "line": 3, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }
+          ]
+        ], 
         "line": 4, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 6, 
+            "encoded_locals": {
+              "x": 3
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f6", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
+          [
+            "square", 
+            {
+              "x": 3
+            }
+          ], 
           [
             "accumulate", 
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 3, 
               "n": 3, 
@@ -2457,26 +6139,97 @@
               "previous": 16
             }
           ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
+        ], 
         "line": 10, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "square", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 6, 
+            "encoded_locals": {
+              "x": 3
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f6", 
+            "ordered_varnames": [
+              "x"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -2489,11 +6242,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 3, 
               "n": 3, 
@@ -2501,70 +6254,99 @@
               "previous": 16
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "square", 
-        "line": 11, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            4
-          ], 
-          "add": [
-            "REF", 
-            5
-          ], 
-          "square": [
-            "REF", 
-            6
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "square", 
-            {
-              "x": 3
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 3, 
               "n": 3, 
               "base": 11, 
               "previous": 16
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "square", 
-        "line": 11, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 6, 
+            "encoded_locals": {
+              "__return__": 9, 
+              "x": 3
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "square", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "square_f6", 
+            "ordered_varnames": [
+              "x", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "square", 
@@ -2578,11 +6360,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 3, 
               "n": 3, 
@@ -2590,26 +6372,217 @@
               "previous": 16
             }
           ]
-        ]
+        ], 
+        "line": 11, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 7, 
+            "encoded_locals": {
+              "a": 16, 
+              "b": 9
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f7", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "add", 
+            {
+              "a": 16, 
+              "b": 9
+            }
+          ], 
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }
+          ]
+        ], 
         "line": 7, 
+        "event": "call"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "add", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 16
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 7, 
+            "encoded_locals": {
+              "a": 16, 
+              "b": 9
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f7", 
+            "ordered_varnames": [
+              "a", 
+              "b"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "call", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -2623,11 +6596,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 3, 
               "n": 3, 
@@ -2635,71 +6608,101 @@
               "previous": 16
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "add", 
-        "line": 8, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            4
-          ], 
-          "add": [
-            "REF", 
-            5
-          ], 
-          "square": [
-            "REF", 
-            6
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "add", 
-            {
-              "a": 16, 
-              "b": 9
-            }
-          ], 
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 3, 
               "n": 3, 
               "base": 11, 
               "previous": 16
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "add", 
-        "line": 8, 
+            }, 
+            "is_highlighted": false, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }, 
+          {
+            "frame_id": 7, 
+            "encoded_locals": {
+              "a": 16, 
+              "__return__": 25, 
+              "b": 9
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "add", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "add_f7", 
+            "ordered_varnames": [
+              "a", 
+              "b", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "add", 
@@ -2714,11 +6717,11 @@
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 3, 
               "n": 3, 
@@ -2726,37 +6729,187 @@
               "previous": 16
             }
           ]
-        ]
+        ], 
+        "line": 8, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 25
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
+        "globals": {
+          "accumulate": [
+            "REF", 
+            1
+          ], 
+          "add": [
+            "REF", 
+            2
+          ], 
+          "square": [
+            "REF", 
+            3
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "accumulate", 
+            {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 25
+            }
+          ]
+        ], 
         "line": 3, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
+        "func_name": "accumulate", 
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
+              "term": [
+                "REF", 
+                3
+              ], 
+              "combiner": [
+                "REF", 
+                2
+              ], 
+              "i": 3, 
+              "n": 3, 
+              "base": 11, 
+              "previous": 25
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "step_line", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "accumulate", 
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 3, 
               "n": 3, 
@@ -2764,75 +6917,95 @@
               "previous": 25
             }
           ]
-        ]
+        ], 
+        "line": 5, 
+        "event": "step_line"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "accumulate", 
-        "line": 5, 
-        "globals": {
-          "accumulate": [
-            "REF", 
-            4
-          ], 
-          "add": [
-            "REF", 
-            5
-          ], 
-          "square": [
-            "REF", 
-            6
-          ]
-        }, 
-        "event": "step_line", 
-        "stack_locals": [
-          [
-            "accumulate", 
-            {
+        "stack_to_render": [
+          {
+            "frame_id": 1, 
+            "encoded_locals": {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 3, 
               "n": 3, 
               "base": 11, 
+              "__return__": 25, 
               "previous": 25
-            }
-          ]
-        ]
-      }, 
-      {
-        "func_name": "accumulate", 
-        "line": 5, 
+            }, 
+            "is_highlighted": true, 
+            "is_parent": false, 
+            "func_name": "accumulate", 
+            "is_zombie": false, 
+            "parent_frame_id_list": [], 
+            "unique_hash": "accumulate_f1", 
+            "ordered_varnames": [
+              "combiner", 
+              "base", 
+              "n", 
+              "term", 
+              "previous", 
+              "i", 
+              "__return__"
+            ]
+          }
+        ], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "return", 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
         "stack_locals": [
           [
             "accumulate", 
             {
               "term": [
                 "REF", 
-                6
+                3
               ], 
               "combiner": [
                 "REF", 
-                5
+                2
               ], 
               "i": 3, 
               "n": 3, 
@@ -2841,27 +7014,53 @@
               "previous": 25
             }
           ]
-        ]
+        ], 
+        "line": 5, 
+        "event": "return"
       }, 
       {
+        "ordered_globals": [
+          "accumulate", 
+          "add", 
+          "square"
+        ], 
+        "stdout": "", 
         "func_name": "<module>", 
-        "line": 13, 
+        "stack_to_render": [], 
         "globals": {
           "accumulate": [
             "REF", 
-            4
+            1
           ], 
           "add": [
             "REF", 
-            5
+            2
           ], 
           "square": [
             "REF", 
-            6
+            3
           ]
         }, 
-        "event": "return", 
-        "stack_locals": []
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "accumulate(combiner, base, n, term)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "add(a, b)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "square(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [], 
+        "line": 13, 
+        "event": "return"
       }
     ], 
     "studentId": 384, 
@@ -2872,7 +7071,7 @@
         "code": "    previous = term(base)"
       }
     ], 
-    "test": "accumulate(add, 11, 3, square)", 
+    "test": "accumulate(add, 11, 3, square)   # 11 + 1^2 + 2^2 + 3^2", 
     "beforeAst": [
       {
         "error": true

@@ -215,9 +215,9 @@ class Ladder extends Component {
         <div className="ui two column grid">
           <div className="eight wide column">
             <h2>Result</h2>
-            <pre><code className="hljs">
+            <Highlight className="python">
               { `${this.props.test}\n>>> ${this.props.result}` }
-            </code></pre>
+            </Highlight>
             <div className="ladder">
               <pre><code className="hljs">
                 { this.state.beforeEvents.map((event, index) => {
@@ -228,9 +228,9 @@ class Ladder extends Component {
           </div>
           <div className="eight wide column">
             <h2>Expected</h2>
-            <pre><code className="hljs">
+            <Highlight className="python">
               { `${this.props.test}\n>>> ${this.props.expected}` }
-            </code></pre>
+            </Highlight>
             <div className="ladder">
               <pre><code className="hljs">
                 { this.state.afterEvents.map((event, index) => {

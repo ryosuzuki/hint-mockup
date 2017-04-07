@@ -21,13 +21,15 @@ class Record {
 
     for (let i = 0; i < traces.length; i++) {
       let trace = traces[i]
+      if (trace.event === 'call') this.addCall(trace)
+
       for (let func of Object.keys(trace.locals)) {
         let builtin = ['add', 'mul', 'identity', 'square', 'increment', 'triple'].includes(func)
         if (!builtin) {
           this.addValue(traces, i, func)
         }
       }
-      if (trace.event === 'call') this.addCall(trace)
+
       if (trace.event === 'return') this.addReturn(trace)
     }
 
@@ -172,18 +174,18 @@ class Record {
       if (local !== undefined) locals[key] = local
     }
 
+    /*
+      e.g.
+      funcStr = 'accumulate(combiner, base, n, term)
+      funcName = 'accumulate'
+      funcArgs = 'combiner, base, n, term'
+      args = ['combiner', 'base', 'n', 'term']
+    */
     let args = []
     for (let i of Object.keys(trace.heap)) {
       let heap = trace.heap[i]
       let funcStr = heap[1]
       let funcName = funcStr.split('(')[0]
-      /*
-        e.g.
-        funcStr = 'accumulate(combiner, base, n, term)
-        funcName = 'accumulate'
-        funcArgs = 'combiner, base, n, term'
-        args = ['combiner', 'base', 'n', 'term']
-      */
       if (func === funcName) {
         let funcArgs = /\(\s*([^)]+?)\s*\)/.exec(funcStr)[1]
         if (funcArgs) {

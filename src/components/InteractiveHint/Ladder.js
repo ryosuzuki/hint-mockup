@@ -105,7 +105,7 @@ class Ladder extends Component {
     events = events.map((event) => {
       if (!focusKeys.includes(event.key)) return false
       if (event.builtin) return false
-      if (event.type === 'call' && event.children.length === 0) return false
+      // if (event.type === 'call' && event.children.length === 0) return false
 
       let trimmedEvents = events.slice(0, event.id)
       let history = {}
@@ -138,10 +138,10 @@ class Ladder extends Component {
 
       switch (event.type) {
         case 'call':
-          event.call = event.children[0]
+          event.call = // event.children[0]
           event.html = [
             { className: 'normal', text: 'call ' },
-            { className: 'keyword', text: event.call },
+            { className: 'keyword', text: event.key },
           ]
           indent++
           event.indent = indent

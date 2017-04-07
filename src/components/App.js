@@ -44,7 +44,7 @@ class App extends Component {
       return false
     }
     if (!params.type || !params.id || !types.includes(params.type)) {
-      window.location.href = '/?type=accumulate&id=0'
+      window.location.href = `${window.location.pathname}?type=accumulate&id=0`
       return false
     }
 

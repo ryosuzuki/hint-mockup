@@ -65,12 +65,8 @@ class Record {
   addCall(trace) {
     let func = trace.func_name
     if (func === "<module>") return
-    let args = {}
-    for (let key of Object.keys(trace.locals[func])) {
-      let arg = trace.locals[func][key]
-      if (arg !== undefined) args[key] = arg
-    }
-    let key = this.getKey(func, args)
+
+    let key = this.getKey(func, trace)
     let builtin = ['add', 'mul', 'identity', 'square', 'increment', 'triple'].includes(func)
     let node = {
       type: 'call',
@@ -100,13 +96,8 @@ class Record {
   addReturn(trace) {
     let func = trace.func_name
     if (func === "<module>") return
-    let args = {}
-    for (let key of Object.keys(trace.locals[func])) {
-      if (key === '__return__') continue
-      let arg = trace.locals[func][key]
-      if (arg !== undefined) args[key] = arg
-    }
-    let key = this.getKey(func, args)
+
+    let key = this.getKey(func, trace)
     let value = trace.locals[func]['__return__']
 
     this.history[key]['value'] = value
@@ -174,27 +165,35 @@ class Record {
     }
   }
 
-  getKey(func, args) {
-    // TODO
-    // Know issue http://0.0.0.0:8080/?id=55
-    // helper(combiner, n-1, term)
-    // x helper(identity, add, 0)
-    // o helper(add, 0, identity)
-    if (func === 'accumulate') {
-      const ks = ['combiner', 'base', 'n', 'term']
-      return `${func}(${ks.map(k => args[k]).join(', ')})`
-    } else if (func === 'product') {
-      const ks = ['n', 'term']
-      return `${func}(${ks.map(k => args[k]).join(', ')})`
-    } else if (func === 'g') {
-      const ks = ['n']
-      return `${func}(${ks.map(k => args[k]).join(', ')})`
-    } else if (func === 'repeated') {
-      const ks = ['f', 'n']
-      return `${func}(${ks.map(k => args[k]).join(', ')})`
-    } else {
-      return `${func}(${Object.values(args).join(', ')})`
+  getKey(func, trace) {
+    let locals = {}
+    for (let key of Object.keys(trace.locals[func])) {
+      let local = trace.locals[func][key]
+      if (local !== undefined) locals[key] = local
     }
+
+    let args = []
+    for (let i of Object.keys(trace.heap)) {
+      let heap = trace.heap[i]
+      let funcStr = heap[1]
+      let funcName = funcStr.split('(')[0]
+      /*
+        e.g.
+        funcStr = 'accumulate(combiner, base, n, term)
+        funcName = 'accumulate'
+        funcArgs = 'combiner, base, n, term'
+        args = ['combiner', 'base', 'n', 'term']
+      */
+      if (func === funcName) {
+        let funcArgs = /\(\s*([^)]+?)\s*\)/.exec(funcStr)[1]
+        if (funcArgs) {
+          args = funcArgs.split(/\s*,\s*/)
+        }
+        break
+      }
+    }
+
+    return `${func}(${args.map(arg => locals[arg]).join(', ')})`
   }
 
   check() {

@@ -12,6 +12,7 @@ class Tree {
     this.ast = {}
     this.quizes = []
     this.updates = []
+    this.type = undefined
   }
 
   analyze(ast) {
@@ -23,12 +24,15 @@ class Tree {
       let el = body[key]
       if (key === 'Assign') {
         this.ast = this.addAssign(el)
+        this.type = 'assign'
       }
       if (key === 'Return') {
         this.ast = this.addReturn(el)
+        this.type = 'return'
       }
       if (key === 'Expr') {
         this.ast = this.addExpr(el)
+        this.type = 'expression'
       }
     }
   }

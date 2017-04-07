@@ -154,7 +154,8 @@ class App extends Component {
 
     return (
       <div>
-        <div className="ui two column centered grid">
+        <div className="ui two column centered grid" style={{ marginTop: '20px' }}>
+          {/*
           <div className="fifteen wide column">
             <h1 id="top-title" className="ui center aligned huge header">
               Exploring the Design Space of Automated Hints -
@@ -163,6 +164,7 @@ class App extends Component {
               </a>
             </h1>
           </div>
+          */}
           <div id="type-links" className="six wide column">
             <a id="accumulate" className="ui basic button" href="?type=accumulate&id=0">accumulate</a>
             <a id="product" className="ui basic button" href="?type=product&id=0">product</a>

@@ -120,11 +120,20 @@ class Ladder extends Component {
         tree.history = history
         tree.analyze(ast)
         event.updates = tree.updates
+
+        if (event.type !== tree.type && event.value !== '') {
+          event.updates = [event.value]
+        }
+
         return event
       } catch (err) {
         event.updates = []
         return event
       }
+
+
+
+
     }).filter(event => event)
 
     let max = this.state.max

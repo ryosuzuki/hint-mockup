@@ -35,8 +35,6 @@ class InteractiveHint extends Component {
   render() {
     return (
       <div>
-        <h1>Interactive Hint</h1>
-
         <div className="ui message hint-message">
           <div className="ui three column grid">
             <div className="five wide column">

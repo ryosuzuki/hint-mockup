@@ -132,7 +132,10 @@ class Item {
     let expected = this.item.failed[errorIndex+1]
     expected = parseInt(expected.substr(1))
     let result = this.item.failed[errorIndex+3]
-    result = parseInt(result.substr(1))
+    result = result.substr(6)
+    if (!isNaN(parseInt(result))) {
+      result = parseInt(result)
+    }
     let log = this.item.failed.slice(testIndex, errorIndex+4).join('\n')
 
     this.test = test

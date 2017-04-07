@@ -1,0 +1,2192 @@
+[
+  {
+    "diffs": [
+      {
+        "count": 3, 
+        "value": "def repeated(f, n):\n    fn, i = id, 0\n    while n>0:\n"
+      }, 
+      {
+        "count": 1, 
+        "removed": true, 
+        "value": "        fn = compose(f, fn)\n"
+      }, 
+      {
+        "count": 2, 
+        "added": true, 
+        "value": "        fn = compose1(f, fn)\n        n -= 1\n"
+      }, 
+      {
+        "count": 7, 
+        "value": "    return fn\ndef id(x):\n    return x\ndef compose1(f, g):\n    def h(x):\n        return f(g(x))\n    return h"
+      }
+    ], 
+    "code": "def repeated(f, n):\n    fn, i = id, 0\n    while n>0:\n        fn = compose(f, fn)\n        fn = compose1(f, fn)\n        n -= 1\n    return fn\ndef id(x):\n    return x\ndef compose1(f, g):\n    def h(x):\n        return f(g(x))\n    return h\n", 
+    "afterCode": "def repeated(f, n):\n    fn, i = id, 0\n    while n>0:\n        fn = compose1(f, fn)\n        n -= 1\n    return fn\ndef id(x):\n    return x\ndef compose1(f, g):\n    def h(x):\n        return f(g(x))\n    return h\ndef increment(x):\n  return x + 1\n\nadd_three = repeated(increment, 3)", 
+    "log": ">>> add_three = repeated(increment, 3)\nTraceback (most recent call last):\n  File \"C:\\Users\\Gustavo\\Box Sync\\pesquisa\\tutor\\hw02-sp16\\hw02.py\", line 35, in repeated\n    fn = compose(f, fn)\nNameError: name 'compose' is not defined\n\n# Error: expected\n#     \n# but got\n#     NameError", 
+    "addedLine": [
+      {
+        "line": 4, 
+        "code": "        fn = compose1(f, fn)"
+      }, 
+      {
+        "line": 5, 
+        "code": "        n -= 1"
+      }
+    ], 
+    "afterAst": [
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Assign": {
+                "targets": [
+                  {
+                    "Tuple": {
+                      "elts": [
+                        {
+                          "Name": {
+                            "ctx": "Store", 
+                            "id": "fn"
+                          }
+                        }, 
+                        {
+                          "Name": {
+                            "ctx": "Store", 
+                            "id": "i"
+                          }
+                        }
+                      ], 
+                      "ctx": "Store"
+                    }
+                  }
+                ], 
+                "value": {
+                  "Tuple": {
+                    "elts": [
+                      {
+                        "Name": {
+                          "ctx": "Load", 
+                          "id": "id"
+                        }
+                      }, 
+                      {
+                        "Num": {
+                          "n": 0
+                        }
+                      }
+                    ], 
+                    "ctx": "Load"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Assign": {
+                "targets": [
+                  {
+                    "Name": {
+                      "ctx": "Store", 
+                      "id": "fn"
+                    }
+                  }
+                ], 
+                "value": {
+                  "Call": {
+                    "keywords": [], 
+                    "kwargs": null, 
+                    "args": [
+                      {
+                        "Name": {
+                          "ctx": "Load", 
+                          "id": "f"
+                        }
+                      }, 
+                      {
+                        "Name": {
+                          "ctx": "Load", 
+                          "id": "fn"
+                        }
+                      }
+                    ], 
+                    "func": {
+                      "Name": {
+                        "ctx": "Load", 
+                        "id": "compose1"
+                      }
+                    }, 
+                    "starargs": null
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "AugAssign": {
+                "target": {
+                  "Name": {
+                    "ctx": "Store", 
+                    "id": "n"
+                  }
+                }, 
+                "value": {
+                  "Num": {
+                    "n": 1
+                  }
+                }, 
+                "op": "Sub"
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Name": {
+                    "ctx": "Load", 
+                    "id": "fn"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Name": {
+                    "ctx": "Load", 
+                    "id": "x"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Call": {
+                    "keywords": [], 
+                    "kwargs": null, 
+                    "args": [
+                      {
+                        "Call": {
+                          "keywords": [], 
+                          "kwargs": null, 
+                          "args": [
+                            {
+                              "Name": {
+                                "ctx": "Load", 
+                                "id": "x"
+                              }
+                            }
+                          ], 
+                          "func": {
+                            "Name": {
+                              "ctx": "Load", 
+                              "id": "g"
+                            }
+                          }, 
+                          "starargs": null
+                        }
+                      }
+                    ], 
+                    "func": {
+                      "Name": {
+                        "ctx": "Load", 
+                        "id": "f"
+                      }
+                    }, 
+                    "starargs": null
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Name": {
+                    "ctx": "Load", 
+                    "id": "h"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ], 
+    "after": "def repeated(f, n):\n    fn, i = id, 0\n    while n>0:\n        fn = compose1(f, fn)\n        n -= 1\n    return fn\ndef id(x):\n    return x\ndef compose1(f, g):\n    def h(x):\n        return f(g(x))\n    return h", 
+    "beforeCode": "def repeated(f, n):\n    fn, i = id, 0\n    while n>0:\n        fn = compose(f, fn)\n    return fn\ndef id(x):\n    return x\ndef compose1(f, g):\n    def h(x):\n        return f(g(x))\n    return h\ndef increment(x):\n  return x + 1\n\nadd_three = repeated(increment, 3)", 
+    "rule": "Apply(ast, CPatch(EditMap(\\node => Update(node, LeafConstNode(NameExpressionNode-compose1)), Selected(\\x => Match(x, StartsWithParent(Node(CallExpressionNode, TChildren(Target(LeafWildcard(\"NameExpressionNode\")), TChildren(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\"))), TChild(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\"))))))))), InOrderSort(ast))), Patch(EditMap(\\node => Insert(node, ConstNode(AugmentedAssignStatementNode-Subtract, Children(LeafConstNode(NameExpressionNode-n), SingleChild(LeafConstNode(ConstantExpressionNode-1)))), 1), Selected(\\x => Match(x, StartsWithParent(Node(WhileStatementNode, TChildren(Node(BinaryExpressionNode-GreaterThan, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(LeafWildcard(\"ConstantExpressionNode\")))), TChild(Target(Node(SuiteStatementNode, TChild(Node(AssignmentStatementNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(CallExpressionNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChildren(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\"))), TChild(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\")))))))))))))))))), InOrderSort(ast))))))", 
+    "beforeTraces": [
+      {
+        "func_name": "<module>", 
+        "line": 1, 
+        "globals": {}, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 6, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 8, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "id": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 12, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "id": [
+            "REF", 
+            2
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 15, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ], 
+          "increment": [
+            "REF", 
+            4
+          ], 
+          "id": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 1, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ], 
+          "increment": [
+            "REF", 
+            4
+          ], 
+          "id": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "f": [
+                "REF", 
+                4
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 2, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ], 
+          "increment": [
+            "REF", 
+            4
+          ], 
+          "id": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "f": [
+                "REF", 
+                4
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 3, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ], 
+          "increment": [
+            "REF", 
+            4
+          ], 
+          "id": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                4
+              ], 
+              "fn": [
+                "REF", 
+                2
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 4, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ], 
+          "increment": [
+            "REF", 
+            4
+          ], 
+          "id": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                4
+              ], 
+              "fn": [
+                "REF", 
+                2
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "exception_msg": "NameError: global name 'compose' is not defined", 
+        "func_name": "repeated", 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ], 
+          "increment": [
+            "REF", 
+            4
+          ], 
+          "id": [
+            "REF", 
+            2
+          ]
+        }, 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                4
+              ], 
+              "fn": [
+                "REF", 
+                2
+              ], 
+              "n": 3
+            }
+          ]
+        ], 
+        "line": 4, 
+        "event": "exception"
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 4, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ], 
+          "increment": [
+            "REF", 
+            4
+          ], 
+          "id": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "__return__": null, 
+              "f": [
+                "REF", 
+                4
+              ], 
+              "fn": [
+                "REF", 
+                2
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "exception_msg": "NameError: global name 'compose' is not defined", 
+        "func_name": "<module>", 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ], 
+          "increment": [
+            "REF", 
+            4
+          ], 
+          "id": [
+            "REF", 
+            2
+          ]
+        }, 
+        "stack_locals": [], 
+        "line": 15, 
+        "event": "exception"
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 15, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ], 
+          "increment": [
+            "REF", 
+            4
+          ], 
+          "id": [
+            "REF", 
+            2
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": []
+      }, 
+      {
+        "exception_msg": "Unknown error", 
+        "event": "uncaught_exception"
+      }
+    ], 
+    "expected": null, 
+    "afterTraces": [
+      {
+        "func_name": "<module>", 
+        "line": 1, 
+        "globals": {}, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 7, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 9, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 13, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "id": [
+            "REF", 
+            6
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 16, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": []
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 1, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "f": [
+                "REF", 
+                8
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 2, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "f": [
+                "REF", 
+                8
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 3, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                6
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 4, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                6
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 9, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "g": [
+                "REF", 
+                6
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                6
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 10, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "g": [
+                "REF", 
+                6
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                6
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 12, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "h": [
+                "REF", 
+                9
+              ], 
+              "g": [
+                "REF", 
+                6
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                6
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 12, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "__return__": [
+                "REF", 
+                9
+              ], 
+              "h": [
+                "REF", 
+                9
+              ], 
+              "g": [
+                "REF", 
+                6
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                6
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 5, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                9
+              ], 
+              "n": 3
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 3, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                9
+              ], 
+              "n": 2
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 4, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                9
+              ], 
+              "n": 2
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 9, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "g": [
+                "REF", 
+                9
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                9
+              ], 
+              "n": 2
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 10, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "g": [
+                "REF", 
+                9
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                9
+              ], 
+              "n": 2
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 12, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "h": [
+                "REF", 
+                10
+              ], 
+              "g": [
+                "REF", 
+                9
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                9
+              ], 
+              "n": 2
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 12, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "__return__": [
+                "REF", 
+                10
+              ], 
+              "h": [
+                "REF", 
+                10
+              ], 
+              "g": [
+                "REF", 
+                9
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                9
+              ], 
+              "n": 2
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 5, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                10
+              ], 
+              "n": 2
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 3, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                10
+              ], 
+              "n": 1
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 4, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                10
+              ], 
+              "n": 1
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 9, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "call", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "g": [
+                "REF", 
+                10
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                10
+              ], 
+              "n": 1
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 10, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "g": [
+                "REF", 
+                10
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                10
+              ], 
+              "n": 1
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 12, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "h": [
+                "REF", 
+                11
+              ], 
+              "g": [
+                "REF", 
+                10
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                10
+              ], 
+              "n": 1
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "compose1", 
+        "line": 12, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "compose1", 
+            {
+              "__return__": [
+                "REF", 
+                11
+              ], 
+              "h": [
+                "REF", 
+                11
+              ], 
+              "g": [
+                "REF", 
+                10
+              ], 
+              "f": [
+                "REF", 
+                8
+              ]
+            }
+          ], 
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                10
+              ], 
+              "n": 1
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 5, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                11
+              ], 
+              "n": 1
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 3, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                11
+              ], 
+              "n": 0
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 6, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "step_line", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                11
+              ], 
+              "n": 0
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "repeated", 
+        "line": 6, 
+        "globals": {
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "id": [
+            "REF", 
+            6
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": [
+          [
+            "repeated", 
+            {
+              "i": 0, 
+              "__return__": [
+                "REF", 
+                11
+              ], 
+              "f": [
+                "REF", 
+                8
+              ], 
+              "fn": [
+                "REF", 
+                11
+              ], 
+              "n": 0
+            }
+          ]
+        ]
+      }, 
+      {
+        "func_name": "<module>", 
+        "line": 16, 
+        "globals": {
+          "id": [
+            "REF", 
+            6
+          ], 
+          "repeated": [
+            "REF", 
+            5
+          ], 
+          "add_three": [
+            "REF", 
+            11
+          ], 
+          "increment": [
+            "REF", 
+            8
+          ], 
+          "compose1": [
+            "REF", 
+            7
+          ]
+        }, 
+        "event": "return", 
+        "stack_locals": []
+      }
+    ], 
+    "studentId": 654, 
+    "result": null, 
+    "removedLine": [
+      {
+        "line": 3, 
+        "code": "        fn = compose(f, fn)"
+      }
+    ], 
+    "test": "add_three = repeated(increment, 3)", 
+    "beforeAst": [
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Assign": {
+                "targets": [
+                  {
+                    "Tuple": {
+                      "elts": [
+                        {
+                          "Name": {
+                            "ctx": "Store", 
+                            "id": "fn"
+                          }
+                        }, 
+                        {
+                          "Name": {
+                            "ctx": "Store", 
+                            "id": "i"
+                          }
+                        }
+                      ], 
+                      "ctx": "Store"
+                    }
+                  }
+                ], 
+                "value": {
+                  "Tuple": {
+                    "elts": [
+                      {
+                        "Name": {
+                          "ctx": "Load", 
+                          "id": "id"
+                        }
+                      }, 
+                      {
+                        "Num": {
+                          "n": 0
+                        }
+                      }
+                    ], 
+                    "ctx": "Load"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Assign": {
+                "targets": [
+                  {
+                    "Name": {
+                      "ctx": "Store", 
+                      "id": "fn"
+                    }
+                  }
+                ], 
+                "value": {
+                  "Call": {
+                    "keywords": [], 
+                    "kwargs": null, 
+                    "args": [
+                      {
+                        "Name": {
+                          "ctx": "Load", 
+                          "id": "f"
+                        }
+                      }, 
+                      {
+                        "Name": {
+                          "ctx": "Load", 
+                          "id": "fn"
+                        }
+                      }
+                    ], 
+                    "func": {
+                      "Name": {
+                        "ctx": "Load", 
+                        "id": "compose"
+                      }
+                    }, 
+                    "starargs": null
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Name": {
+                    "ctx": "Load", 
+                    "id": "fn"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Name": {
+                    "ctx": "Load", 
+                    "id": "x"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "error": true
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Call": {
+                    "keywords": [], 
+                    "kwargs": null, 
+                    "args": [
+                      {
+                        "Call": {
+                          "keywords": [], 
+                          "kwargs": null, 
+                          "args": [
+                            {
+                              "Name": {
+                                "ctx": "Load", 
+                                "id": "x"
+                              }
+                            }
+                          ], 
+                          "func": {
+                            "Name": {
+                              "ctx": "Load", 
+                              "id": "g"
+                            }
+                          }, 
+                          "starargs": null
+                        }
+                      }
+                    ], 
+                    "func": {
+                      "Name": {
+                        "ctx": "Load", 
+                        "id": "f"
+                      }
+                    }, 
+                    "starargs": null
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }, 
+      {
+        "Module": {
+          "body": [
+            {
+              "Return": {
+                "value": {
+                  "Name": {
+                    "ctx": "Load", 
+                    "id": "h"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ], 
+    "removed": [
+      3
+    ], 
+    "id": 0, 
+    "added": [
+      4, 
+      5
+    ], 
+    "before": "def repeated(f, n):\n    fn, i = id, 0\n    while n>0:\n        fn = compose(f, fn)\n    return fn\ndef id(x):\n    return x\ndef compose1(f, g):\n    def h(x):\n        return f(g(x))\n    return h"
+  }
+]

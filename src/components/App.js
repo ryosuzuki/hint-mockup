@@ -30,7 +30,7 @@ class App extends Component {
   componentDidMount() {
     $.ajax({
       method: 'GET',
-      url: `${window.location.pathname}data/g.json`
+      url: `${window.location.pathname}data/repeated.json`
       // url: `${window.location.pathname}data/example.json`
     })
     .then((items) => {

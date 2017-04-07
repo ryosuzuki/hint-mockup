@@ -40,9 +40,6 @@ class Tree {
       let tn = this.addNode(target)
       left.push(tn)
 
-      if (!_.last(this.quizes)) debugger
-
-
       if (_.last(this.quizes).key === tn.key) this.quizes.pop()
     }
     let key = left.map(target => target.key).join(', ')

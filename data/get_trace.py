@@ -52,17 +52,31 @@ for item in items:
   # accumulate(add, 11, 3, square)
   # >>> ['accumulate', 'add', '11', '3', 'square']
   #
+  # add_three = repeated(increment, 3)
+  # >>> ['add_three', 'repeated', 'increment', '3']
+  #
+  # add_three(5)
+  # >>> ['add_three', '5']
+  #
   # repeated(square, 4)(5)
   # >>> ['repeated', 'square', '4', '5']
+  #
 
+  if not keywords:
+    continue
   key = keywords[0]
+
   if key == 'product':
     term = keywords[2]
   elif key == 'accumulate':
     combiner = keywords[1]
     term = keywords[4]
   elif key == 'repeated':
-    term = keywords[2]
+    term = keywords[1]
+  elif key == 'add_three':
+    term = "increment"
+    if keywords[1] == '5':
+      test = "add_three = repeated(increment, 3)\nadd_three(5)"
 
   if combiner == 'add':
     combiner_func = "\n\ndef add(a, b):\n  return a + b\n"
@@ -94,7 +108,6 @@ for item in items:
   item['afterCode'] = after
   item['beforeTraces'] = beforeTraces
   item['afterTraces'] = afterTraces
-
 
 
 with open(question_type + '_example.json', 'w') as file:

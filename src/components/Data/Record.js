@@ -189,6 +189,9 @@ class Record {
     } else if (func === 'g') {
       const ks = ['n']
       return `${func}(${ks.map(k => args[k]).join(', ')})`
+    } else if (func === 'repeated') {
+      const ks = ['f', 'n']
+      return `${func}(${ks.map(k => args[k]).join(', ')})`
     } else {
       return `${func}(${Object.values(args).join(', ')})`
     }

@@ -339,7 +339,6 @@ def exec_script_str(script_str, ignore_id=False):
     # pg_logger.finalize()
     # sys.exit(0) # need to forceably STOP execution
   finally:
-    print(pg_logger.trace)
     return pg_logger
 
 

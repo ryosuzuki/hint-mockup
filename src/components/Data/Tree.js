@@ -244,6 +244,7 @@ class Tree {
         updates.push(update)
       }
     }
+
     updates.push(value)
     let node = {
       type: 'binop',

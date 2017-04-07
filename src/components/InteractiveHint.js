@@ -39,7 +39,7 @@ class InteractiveHint extends Component {
 
         <div className="ui message hint-message">
           <div className="ui two column grid">
-            <div className="eleven wide column">
+            <div className="sixteen wide column">
               <h2>Code</h2>
               <div id="hoge">
               <CodeMirror
@@ -49,15 +49,17 @@ class InteractiveHint extends Component {
               />
               </div>
             </div>
+            {/*
             <div className="five wide column">
               <h2>Failed Test Result</h2>
               <Highlight className="python">
                 { this.props.log }
               </Highlight>
             </div>
+            */}
           </div>
           <div className="ui two column grid">
-            <button className="ui basic button" onClick={ () => { $('#ladder').toggle() } }>Hide Hint</button>
+            <button className="ui basic button" onClick={ () => { $('.ladder').toggle() } }>Hide Hint</button>
             <div className="sixteen wide column">
 
               <Ladder

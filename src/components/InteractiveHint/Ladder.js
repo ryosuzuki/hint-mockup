@@ -211,30 +211,38 @@ class Ladder extends Component {
     })
 
     return (
-      <div id='ladder' className="ladder">
+      <div id='ladder'>
         <div className="ui two column grid">
           <div className="eight wide column">
             <h2>Result</h2>
             <pre><code className="hljs">
-              { this.state.beforeEvents.map((event, index) => {
-                return this.renderEvent(event, index, true)
-              }) }
+              { `${this.props.test}\n>>> ${this.props.result}` }
             </code></pre>
+            <div className="ladder">
+              <pre><code className="hljs">
+                { this.state.beforeEvents.map((event, index) => {
+                  return this.renderEvent(event, index, true)
+                }) }
+              </code></pre>
+            </div>
           </div>
           <div className="eight wide column">
             <h2>Expected</h2>
             <pre><code className="hljs">
-              { this.state.afterEvents.map((event, index) => {
-                return this.renderEvent(event, index, false)
-              }) }
+              { `${this.props.test}\n>>> ${this.props.expected}` }
             </code></pre>
+            <div className="ladder">
+              <pre><code className="hljs">
+                { this.state.afterEvents.map((event, index) => {
+                  return this.renderEvent(event, index, false)
+                }) }
+              </code></pre>
+            </div>
           </div>
 
 
-
-
           <div style={{ width: '10%'}}></div>
-          <div style={{ width: '80%'}}>
+          <div className="ladder" style={{ width: '80%'}}>
             <Slider
               dots
               min={ 0 }

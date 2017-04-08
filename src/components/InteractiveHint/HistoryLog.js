@@ -23,11 +23,11 @@ class HistoryLog extends Component {
                 </code>
                 <br />
                 <code>
-                  - Result:   { this.props.afterHistory[key] ? this.props.afterHistory[key].history.join(' | ') : '' }
+                  - Result: { this.props.beforeHistory[key] ? this.props.beforeHistory[key].history.join(' | ') : '' }
                 </code>
                 <br />
                 <code>
-                  - Expected: { this.props.beforeHistory[key] ? this.props.beforeHistory[key].history.join(' | ') : '' }
+                  - Expected:   { this.props.afterHistory[key] ? this.props.afterHistory[key].history.join(' | ') : '' }
                 </code>
                 <br />
                 <code>

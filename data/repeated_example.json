@@ -21,7 +21,7 @@
       }
     ], 
     "code": "def repeated(f, n):\n    fn, i = id, 0\n    while n>0:\n        fn = compose(f, fn)\n        fn = compose1(f, fn)\n        n -= 1\n    return fn\ndef id(x):\n    return x\ndef compose1(f, g):\n    def h(x):\n        return f(g(x))\n    return h\n", 
-    "afterCode": "def repeated(f, n):\n  fn, i = id, 0\n  while n>0:\n    fn = compose1(f, fn)\n    n -= 1\n  return fn\ndef id(x):\n  return x\ndef compose1(f, g):\n  def h(x):\n    return f(g(x))\n  return h\n\ndef increment(x):\n  return x + 1\n\nadd_three = repeated(increment, 3)", 
+    "afterCode": "def repeated(f, n):\n  fn, i = id, 0\n  while n>0:\n    fn = compose1(f, fn)\n    n -= 1\n  return fn\ndef id(x):\n  return x\ndef compose1(f, g):\n  def h(x):\n    return f(g(x))\n  return h\n\ndef identity(x):\n  return x\n\ndef increment(x):\n  return x + 1\n\nadd_three = repeated(increment, 3)", 
     "log": ">>> add_three = repeated(increment, 3)\nTraceback (most recent call last):\n  File \"C:\\Users\\Gustavo\\Box Sync\\pesquisa\\tutor\\hw02-sp16\\hw02.py\", line 35, in repeated\n    fn = compose(f, fn)\nNameError: name 'compose' is not defined\n\n# Error: expected\n#     \n# but got\n#     NameError", 
     "addedLine": [
       {
@@ -261,7 +261,7 @@
       }
     ], 
     "after": "def repeated(f, n):\n    fn, i = id, 0\n    while n>0:\n        fn = compose1(f, fn)\n        n -= 1\n    return fn\ndef id(x):\n    return x\ndef compose1(f, g):\n    def h(x):\n        return f(g(x))\n    return h", 
-    "beforeCode": "def repeated(f, n):\n  fn, i = id, 0\n  while n>0:\n    fn = compose(f, fn)\n  return fn\ndef id(x):\n  return x\ndef compose1(f, g):\n  def h(x):\n    return f(g(x))\n  return h\n\ndef increment(x):\n  return x + 1\n\nadd_three = repeated(increment, 3)", 
+    "beforeCode": "def repeated(f, n):\n  fn, i = id, 0\n  while n>0:\n    fn = compose(f, fn)\n  return fn\ndef id(x):\n  return x\ndef compose1(f, g):\n  def h(x):\n    return f(g(x))\n  return h\n\ndef identity(x):\n  return x\n\ndef increment(x):\n  return x + 1\n\nadd_three = repeated(increment, 3)", 
     "rule": "Apply(ast, CPatch(EditMap(\\node => Update(node, LeafConstNode(NameExpressionNode-compose1)), Selected(\\x => Match(x, StartsWithParent(Node(CallExpressionNode, TChildren(Target(LeafWildcard(\"NameExpressionNode\")), TChildren(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\"))), TChild(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\"))))))))), InOrderSort(ast))), Patch(EditMap(\\node => Insert(node, ConstNode(AugmentedAssignStatementNode-Subtract, Children(LeafConstNode(NameExpressionNode-n), SingleChild(LeafConstNode(ConstantExpressionNode-1)))), 1), Selected(\\x => Match(x, StartsWithParent(Node(WhileStatementNode, TChildren(Node(BinaryExpressionNode-GreaterThan, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(LeafWildcard(\"ConstantExpressionNode\")))), TChild(Target(Node(SuiteStatementNode, TChild(Node(AssignmentStatementNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChild(Node(CallExpressionNode, TChildren(LeafWildcard(\"NameExpressionNode\"), TChildren(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\"))), TChild(Node(ArgNode, TChild(LeafWildcard(\"NameExpressionNode\")))))))))))))))))), InOrderSort(ast))))))", 
     "beforeTraces": [
       {
@@ -382,7 +382,7 @@
           "repeated", 
           "id", 
           "compose1", 
-          "increment"
+          "identity"
         ], 
         "stdout": "", 
         "func_name": "<module>", 
@@ -396,7 +396,7 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
@@ -423,7 +423,7 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ]
         }, 
@@ -436,6 +436,71 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
+          "increment"
+        ], 
+        "stdout": "", 
+        "func_name": "<module>", 
+        "stack_to_render": [], 
+        "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ], 
+          "identity": [
+            "REF", 
+            4
+          ], 
+          "increment": [
+            "REF", 
+            5
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "repeated(f, n)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "id(x)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "compose1(f, g)", 
+            null
+          ], 
+          "4": [
+            "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
+            "increment(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [], 
+        "line": 19, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "repeated", 
+          "id", 
+          "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -446,7 +511,7 @@
             "encoded_locals": {
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "n": 3
             }, 
@@ -463,6 +528,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -471,13 +540,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -498,6 +567,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -508,7 +582,7 @@
             {
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "n": 3
             }
@@ -522,6 +596,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -532,7 +607,7 @@
             "encoded_locals": {
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "n": 3
             }, 
@@ -549,6 +624,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -557,13 +636,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -584,6 +663,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -594,7 +678,7 @@
             {
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "n": 3
             }
@@ -608,6 +692,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -619,7 +704,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -642,6 +727,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -650,13 +739,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -677,6 +766,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -688,7 +782,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -706,6 +800,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -717,7 +812,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -740,6 +835,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -748,13 +847,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -775,6 +874,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -786,7 +890,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -804,6 +908,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -816,7 +921,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -839,6 +944,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -847,13 +956,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -874,6 +983,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -885,7 +999,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -903,6 +1017,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -915,7 +1030,7 @@
               "__return__": null, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -939,6 +1054,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -947,13 +1066,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -974,6 +1093,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -986,7 +1110,7 @@
               "__return__": null, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -1004,6 +1128,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -1011,6 +1136,10 @@
         "func_name": "<module>", 
         "stack_to_render": [], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -1019,13 +1148,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -1046,12 +1175,17 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
         }, 
         "stack_locals": [], 
-        "line": 16, 
+        "line": 19, 
         "event": "exception"
       }, 
       {
@@ -1059,12 +1193,17 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
         "func_name": "<module>", 
         "stack_to_render": [], 
         "globals": {
+          "identity": [
+            "REF", 
+            4
+          ], 
           "repeated": [
             "REF", 
             1
@@ -1075,7 +1214,7 @@
           ], 
           "increment": [
             "REF", 
-            4
+            5
           ], 
           "id": [
             "REF", 
@@ -1100,12 +1239,17 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
         }, 
         "stack_locals": [], 
-        "line": 16, 
+        "line": 19, 
         "event": "return"
       }
     ], 
@@ -1229,7 +1373,7 @@
           "repeated", 
           "id", 
           "compose1", 
-          "increment"
+          "identity"
         ], 
         "stdout": "", 
         "func_name": "<module>", 
@@ -1243,7 +1387,7 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
@@ -1270,7 +1414,7 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ]
         }, 
@@ -1283,6 +1427,71 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
+          "increment"
+        ], 
+        "stdout": "", 
+        "func_name": "<module>", 
+        "stack_to_render": [], 
+        "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
+          "repeated": [
+            "REF", 
+            1
+          ], 
+          "compose1": [
+            "REF", 
+            3
+          ], 
+          "identity": [
+            "REF", 
+            4
+          ], 
+          "increment": [
+            "REF", 
+            5
+          ]
+        }, 
+        "heap": {
+          "1": [
+            "FUNCTION", 
+            "repeated(f, n)", 
+            null
+          ], 
+          "2": [
+            "FUNCTION", 
+            "id(x)", 
+            null
+          ], 
+          "3": [
+            "FUNCTION", 
+            "compose1(f, g)", 
+            null
+          ], 
+          "4": [
+            "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
+            "increment(x)", 
+            null
+          ]
+        }, 
+        "stack_locals": [], 
+        "line": 20, 
+        "event": "step_line"
+      }, 
+      {
+        "ordered_globals": [
+          "repeated", 
+          "id", 
+          "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -1293,7 +1502,7 @@
             "encoded_locals": {
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "n": 3
             }, 
@@ -1310,6 +1519,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -1318,13 +1531,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -1345,6 +1558,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -1355,7 +1573,7 @@
             {
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "n": 3
             }
@@ -1369,6 +1587,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -1379,7 +1598,7 @@
             "encoded_locals": {
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "n": 3
             }, 
@@ -1396,6 +1615,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -1404,13 +1627,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -1431,6 +1654,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -1441,7 +1669,7 @@
             {
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "n": 3
             }
@@ -1455,6 +1683,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -1466,7 +1695,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -1489,6 +1718,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -1497,13 +1730,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -1524,6 +1757,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -1535,7 +1773,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -1553,6 +1791,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -1564,7 +1803,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -1587,6 +1826,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -1595,13 +1838,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -1622,6 +1865,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -1633,7 +1881,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -1651,6 +1899,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -1662,7 +1911,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -1692,7 +1941,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -1708,6 +1957,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -1716,13 +1969,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -1743,6 +1996,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -1757,7 +2015,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -1767,7 +2025,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -1785,6 +2043,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -1796,7 +2055,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -1826,7 +2085,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -1842,6 +2101,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -1850,13 +2113,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -1877,6 +2140,11 @@
           ], 
           "4": [
             "FUNCTION", 
+            "identity(x)", 
+            null
+          ], 
+          "5": [
+            "FUNCTION", 
             "increment(x)", 
             null
           ]
@@ -1891,7 +2159,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -1901,7 +2169,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -1919,6 +2187,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -1930,7 +2199,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -1956,7 +2225,7 @@
             "encoded_locals": {
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -1964,7 +2233,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -1981,6 +2250,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -1989,13 +2262,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -2016,10 +2289,15 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
+            "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -2031,7 +2309,7 @@
             {
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -2039,7 +2317,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -2049,7 +2327,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -2067,6 +2345,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -2078,7 +2357,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -2104,11 +2383,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -2116,7 +2395,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -2134,6 +2413,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -2142,13 +2425,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -2169,10 +2452,15 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
+            "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -2184,11 +2472,11 @@
             {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -2196,7 +2484,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -2206,7 +2494,7 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
@@ -2224,6 +2512,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -2235,11 +2524,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 3
             }, 
@@ -2261,11 +2550,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -2273,7 +2562,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -2291,6 +2580,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -2299,13 +2592,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -2326,10 +2619,15 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
+            "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -2342,11 +2640,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 3
             }
@@ -2360,6 +2658,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -2371,11 +2670,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }, 
@@ -2397,11 +2696,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -2409,7 +2708,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -2427,6 +2726,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -2435,13 +2738,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -2462,10 +2765,15 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
+            "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -2478,11 +2786,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }
@@ -2496,6 +2804,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -2507,11 +2816,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }, 
@@ -2533,11 +2842,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -2545,7 +2854,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -2563,6 +2872,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -2571,13 +2884,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -2598,10 +2911,15 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
+            "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -2614,11 +2932,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }
@@ -2632,6 +2950,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -2643,11 +2962,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }, 
@@ -2669,11 +2988,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -2681,7 +3000,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -2702,11 +3021,11 @@
             "encoded_locals": {
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -2722,6 +3041,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -2730,13 +3053,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -2757,10 +3080,15 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
+            "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -2772,11 +3100,11 @@
             {
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -2786,11 +3114,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }
@@ -2804,6 +3132,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -2815,11 +3144,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }, 
@@ -2841,11 +3170,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -2853,7 +3182,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -2874,11 +3203,11 @@
             "encoded_locals": {
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -2894,6 +3223,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -2902,13 +3235,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -2929,10 +3262,15 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
+            "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -2944,11 +3282,11 @@
             {
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -2958,11 +3296,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }
@@ -2976,6 +3314,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -2987,11 +3326,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }, 
@@ -3013,11 +3352,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -3025,7 +3364,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -3046,15 +3385,15 @@
             "encoded_locals": {
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -3071,6 +3410,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -3079,13 +3422,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -3106,15 +3449,20 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
-            "h(x)", 
+            "increment(x)", 
             null
           ], 
           "6": [
+            "FUNCTION", 
+            "h(x)", 
+            null
+          ], 
+          "7": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -3126,15 +3474,15 @@
             {
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -3144,11 +3492,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }
@@ -3162,6 +3510,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -3173,11 +3522,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }, 
@@ -3199,11 +3548,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -3211,7 +3560,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -3232,19 +3581,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -3262,6 +3611,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -3270,13 +3623,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -3297,15 +3650,20 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
-            "h(x)", 
+            "increment(x)", 
             null
           ], 
           "6": [
+            "FUNCTION", 
+            "h(x)", 
+            null
+          ], 
+          "7": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -3317,19 +3675,19 @@
             {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -3339,11 +3697,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                5
+                6
               ], 
               "n": 2
             }
@@ -3357,6 +3715,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -3368,11 +3727,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 2
             }, 
@@ -3394,11 +3753,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -3406,7 +3765,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -3427,19 +3786,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -3457,6 +3816,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -3465,13 +3828,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -3492,15 +3855,20 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
+            "FUNCTION", 
             "h(x)", 
             2
           ], 
-          "6": [
+          "7": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -3513,11 +3881,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 2
             }
@@ -3531,6 +3899,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -3542,11 +3911,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }, 
@@ -3568,11 +3937,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -3580,7 +3949,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -3601,19 +3970,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -3631,6 +4000,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -3639,13 +4012,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -3666,15 +4039,20 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
+            "FUNCTION", 
             "h(x)", 
             2
           ], 
-          "6": [
+          "7": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -3687,11 +4065,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }
@@ -3705,6 +4083,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -3716,11 +4095,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }, 
@@ -3742,11 +4121,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -3754,7 +4133,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -3775,19 +4154,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -3805,6 +4184,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -3813,13 +4196,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -3840,15 +4223,20 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
+            "FUNCTION", 
             "h(x)", 
             2
           ], 
-          "6": [
+          "7": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -3861,11 +4249,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }
@@ -3879,6 +4267,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -3890,11 +4279,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }, 
@@ -3916,11 +4305,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -3928,7 +4317,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -3949,19 +4338,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -3982,11 +4371,11 @@
             "encoded_locals": {
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -4002,6 +4391,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -4010,13 +4403,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -4037,15 +4430,20 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
+            "FUNCTION", 
             "h(x)", 
             2
           ], 
-          "6": [
+          "7": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -4057,11 +4455,11 @@
             {
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -4071,11 +4469,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }
@@ -4089,6 +4487,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -4100,11 +4499,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }, 
@@ -4126,11 +4525,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -4138,7 +4537,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -4159,19 +4558,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -4192,11 +4591,11 @@
             "encoded_locals": {
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -4212,6 +4611,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -4220,13 +4623,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -4247,15 +4650,20 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
+            "increment(x)", 
+            null
+          ], 
+          "6": [
+            "FUNCTION", 
             "h(x)", 
             2
           ], 
-          "6": [
+          "7": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -4267,11 +4675,11 @@
             {
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -4281,11 +4689,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }
@@ -4299,6 +4707,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -4310,11 +4719,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }, 
@@ -4336,11 +4745,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -4348,7 +4757,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -4369,19 +4778,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -4402,15 +4811,15 @@
             "encoded_locals": {
               "h": [
                 "REF", 
-                7
+                8
               ], 
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -4427,6 +4836,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -4435,13 +4848,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -4462,20 +4875,25 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
-            "h(x)", 
-            2
+            "increment(x)", 
+            null
           ], 
           "6": [
             "FUNCTION", 
             "h(x)", 
-            null
+            2
           ], 
           "7": [
+            "FUNCTION", 
+            "h(x)", 
+            null
+          ], 
+          "8": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -4487,15 +4905,15 @@
             {
               "h": [
                 "REF", 
-                7
+                8
               ], 
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -4505,11 +4923,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }
@@ -4523,6 +4941,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -4534,11 +4953,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }, 
@@ -4560,11 +4979,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -4572,7 +4991,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -4593,19 +5012,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -4626,19 +5045,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                7
+                8
               ], 
               "h": [
                 "REF", 
-                7
+                8
               ], 
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": true, 
@@ -4656,6 +5075,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -4664,13 +5087,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -4691,20 +5114,25 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
-            "h(x)", 
-            2
+            "increment(x)", 
+            null
           ], 
           "6": [
             "FUNCTION", 
             "h(x)", 
-            null
+            2
           ], 
           "7": [
+            "FUNCTION", 
+            "h(x)", 
+            null
+          ], 
+          "8": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -4716,19 +5144,19 @@
             {
               "__return__": [
                 "REF", 
-                7
+                8
               ], 
               "h": [
                 "REF", 
-                7
+                8
               ], 
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }
           ], 
@@ -4738,11 +5166,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                6
+                7
               ], 
               "n": 1
             }
@@ -4756,6 +5184,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -4767,11 +5196,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                7
+                8
               ], 
               "n": 1
             }, 
@@ -4793,11 +5222,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -4805,7 +5234,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -4826,19 +5255,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -4859,19 +5288,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                7
+                8
               ], 
               "h": [
                 "REF", 
-                7
+                8
               ], 
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -4889,6 +5318,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -4897,13 +5330,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -4924,20 +5357,25 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
-            "h(x)", 
-            2
+            "increment(x)", 
+            null
           ], 
           "6": [
             "FUNCTION", 
             "h(x)", 
-            3
+            2
           ], 
           "7": [
+            "FUNCTION", 
+            "h(x)", 
+            3
+          ], 
+          "8": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -4950,11 +5388,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                7
+                8
               ], 
               "n": 1
             }
@@ -4968,6 +5406,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -4979,11 +5418,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                7
+                8
               ], 
               "n": 0
             }, 
@@ -5005,11 +5444,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -5017,7 +5456,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5038,19 +5477,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5071,19 +5510,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                7
+                8
               ], 
               "h": [
                 "REF", 
-                7
+                8
               ], 
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5101,6 +5540,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -5109,13 +5552,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -5136,20 +5579,25 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
-            "h(x)", 
-            2
+            "increment(x)", 
+            null
           ], 
           "6": [
             "FUNCTION", 
             "h(x)", 
-            3
+            2
           ], 
           "7": [
+            "FUNCTION", 
+            "h(x)", 
+            3
+          ], 
+          "8": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -5162,11 +5610,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                7
+                8
               ], 
               "n": 0
             }
@@ -5180,6 +5628,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -5191,11 +5640,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                7
+                8
               ], 
               "n": 0
             }, 
@@ -5217,11 +5666,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -5229,7 +5678,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5250,19 +5699,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5283,19 +5732,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                7
+                8
               ], 
               "h": [
                 "REF", 
-                7
+                8
               ], 
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5313,6 +5762,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -5321,13 +5774,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -5348,20 +5801,25 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
-            "h(x)", 
-            2
+            "increment(x)", 
+            null
           ], 
           "6": [
             "FUNCTION", 
             "h(x)", 
-            3
+            2
           ], 
           "7": [
+            "FUNCTION", 
+            "h(x)", 
+            3
+          ], 
+          "8": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -5374,11 +5832,11 @@
               "i": 0, 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                7
+                8
               ], 
               "n": 0
             }
@@ -5392,6 +5850,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment"
         ], 
         "stdout": "", 
@@ -5403,15 +5862,15 @@
               "i": 0, 
               "__return__": [
                 "REF", 
-                7
+                8
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                7
+                8
               ], 
               "n": 0
             }, 
@@ -5434,11 +5893,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -5446,7 +5905,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5467,19 +5926,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5500,19 +5959,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                7
+                8
               ], 
               "h": [
                 "REF", 
-                7
+                8
               ], 
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5530,6 +5989,10 @@
           }
         ], 
         "globals": {
+          "id": [
+            "REF", 
+            2
+          ], 
           "repeated": [
             "REF", 
             1
@@ -5538,13 +6001,13 @@
             "REF", 
             3
           ], 
-          "increment": [
+          "identity": [
             "REF", 
             4
           ], 
-          "id": [
+          "increment": [
             "REF", 
-            2
+            5
           ]
         }, 
         "heap": {
@@ -5565,20 +6028,25 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
-            "h(x)", 
-            2
+            "increment(x)", 
+            null
           ], 
           "6": [
             "FUNCTION", 
             "h(x)", 
-            3
+            2
           ], 
           "7": [
+            "FUNCTION", 
+            "h(x)", 
+            3
+          ], 
+          "8": [
             "FUNCTION", 
             "h(x)", 
             null
@@ -5591,15 +6059,15 @@
               "i": 0, 
               "__return__": [
                 "REF", 
-                7
+                8
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ], 
               "fn": [
                 "REF", 
-                7
+                8
               ], 
               "n": 0
             }
@@ -5613,6 +6081,7 @@
           "repeated", 
           "id", 
           "compose1", 
+          "identity", 
           "increment", 
           "add_three"
         ], 
@@ -5624,11 +6093,11 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                5
+                6
               ], 
               "h": [
                 "REF", 
-                5
+                6
               ], 
               "g": [
                 "REF", 
@@ -5636,7 +6105,7 @@
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5657,19 +6126,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                6
+                7
               ], 
               "h": [
                 "REF", 
-                6
+                7
               ], 
               "g": [
                 "REF", 
-                5
+                6
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5690,19 +6159,19 @@
             "encoded_locals": {
               "__return__": [
                 "REF", 
-                7
+                8
               ], 
               "h": [
                 "REF", 
-                7
+                8
               ], 
               "g": [
                 "REF", 
-                6
+                7
               ], 
               "f": [
                 "REF", 
-                4
+                5
               ]
             }, 
             "is_highlighted": false, 
@@ -5720,25 +6189,29 @@
           }
         ], 
         "globals": {
-          "id": [
+          "add_three": [
             "REF", 
-            2
+            8
           ], 
           "repeated": [
             "REF", 
             1
           ], 
-          "add_three": [
-            "REF", 
-            7
-          ], 
-          "increment": [
-            "REF", 
-            4
-          ], 
           "compose1": [
             "REF", 
             3
+          ], 
+          "increment": [
+            "REF", 
+            5
+          ], 
+          "id": [
+            "REF", 
+            2
+          ], 
+          "identity": [
+            "REF", 
+            4
           ]
         }, 
         "heap": {
@@ -5759,27 +6232,32 @@
           ], 
           "4": [
             "FUNCTION", 
-            "increment(x)", 
+            "identity(x)", 
             null
           ], 
           "5": [
             "FUNCTION", 
-            "h(x)", 
-            2
+            "increment(x)", 
+            null
           ], 
           "6": [
             "FUNCTION", 
             "h(x)", 
-            3
+            2
           ], 
           "7": [
+            "FUNCTION", 
+            "h(x)", 
+            3
+          ], 
+          "8": [
             "FUNCTION", 
             "h(x)", 
             4
           ]
         }, 
         "stack_locals": [], 
-        "line": 17, 
+        "line": 20, 
         "event": "return"
       }
     ], 

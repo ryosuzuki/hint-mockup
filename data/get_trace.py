@@ -100,18 +100,30 @@ for item in items:
   if combiner_func is not '':
     before += '\n\n'
     before += combiner_func
+
+  if key == 'add_three' or key == 'repeated':
+    before += '\n\n'
+    before += "def identity(x):\n  return x"
+
   if term_func is not '':
     before += '\n\n'
     before += term_func
+
   before += '\n\n'
   before += test
 
   if combiner_func is not '':
     after += '\n\n'
     after += combiner_func
+
+  if key == 'add_three' or key == 'repeated':
+    after += '\n\n'
+    after += "def identity(x):\n  return x"
+
   if term_func is not '':
     after += '\n\n'
     after += term_func
+
   after += '\n\n'
   after += test
 

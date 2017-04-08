@@ -48,6 +48,7 @@ class Tree {
       }
     }
     let key = left.map(target => target.key).join(', ')
+    if (!right) debugger
     let value = right.value
     let assignValue = left[0].value
 

@@ -127,8 +127,6 @@ class Ladder extends Component {
 
         return event
       } catch (err) {
-
-        debugger
         event.updates = []
         return event
       }

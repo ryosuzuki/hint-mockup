@@ -194,7 +194,6 @@ class Record {
         break
       }
     }
-
     return `${func}(${args.map(arg => locals[arg]).join(', ')})`
   }
 

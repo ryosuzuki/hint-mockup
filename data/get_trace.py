@@ -81,7 +81,8 @@ for item in items:
   elif key == 'add_three':
     term = "increment"
     if keywords[1] == '5':
-      test = "add_three = repeated(increment, 3)\nadd_three(5)"
+      test = "repeated(increment, 3)(5)"
+      item['test'] = test
 
   if combiner == 'add':
     combiner_func = "def add(a, b):\n  return a + b"

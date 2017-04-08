@@ -66,7 +66,7 @@ class Record {
 
   addCall(trace) {
     let func = trace.func_name
-    if (func === "<module>") return
+    if (func === '<module>') return
 
     let key = this.getKey(func, trace)
     let builtin = ['add', 'mul', 'identity', 'square', 'increment', 'triple'].includes(func)
@@ -97,7 +97,7 @@ class Record {
 
   addReturn(trace) {
     let func = trace.func_name
-    if (func === "<module>") return
+    if (func === '<module>') return
 
     let key = this.getKey(func, trace)
     let value = trace.locals[func]['__return__']

@@ -104,7 +104,7 @@ class Ladder extends Component {
     let indent = 0
     events = events.map((event) => {
       if (!focusKeys.includes(event.key)) return false
-      if (event.builtin) return false
+      if (window.type !== 'repeated' && event.builtin) return false
       // if (event.type === 'call' && event.children.length === 0) return false
 
       let trimmedEvents = events.slice(0, event.id)

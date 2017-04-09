@@ -2,6 +2,7 @@
 class Tree {
   constructor() {
     this.history = {}
+    this.event = {}
     this.ast = {}
 
     this.quizes = []
@@ -193,9 +194,14 @@ class Tree {
       let item = this.addNode(elt)
       items.push(item)
     }
-    let origin = items.map(item => item.origin).join(', ')
-    let key = items.map(item => item.key).join(', ')
-    let value = items.map(item => item.value).join(', ')
+
+    let index = items.map(item => item.key).indexOf(this.event.key)
+    // let origin = items.map(item => item.origin).join(', ')
+    // let key = items.map(item => item.key).join(', ')
+    // let value = items.map(item => item.value).join(', ')
+    let origin = items.map(item => item.origin)[index]
+    let key = items.map(item => item.key)[index]
+    let value = items.map(item => item.value)[index]
     let node = {
       type: 'tuple',
       origin: origin,

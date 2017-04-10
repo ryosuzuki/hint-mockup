@@ -23,6 +23,7 @@ class Ladder extends Component {
       events: [],
       quizIndex: null,
       currentLine: null,
+      diffIndex: null
     }
     window.ladder = this
   }
@@ -36,6 +37,8 @@ class Ladder extends Component {
   init() {
     this.generate('before')
     this.generate('after')
+
+
   }
 
 
@@ -182,6 +185,20 @@ class Ladder extends Component {
     state[key] = events
     this.setState(state, () => {
       window.quizes.map((quiz, index) => { quiz.init() })
+
+      let diffIndex
+      if (this.state.beforeEvents.length === 0
+       || this.state.afterEvents.length === 0) return
+      for (let i = 0; i < this.state.beforeEvents.length; i++) {
+        let be = this.state.beforeEvents[i]
+        let ae = this.state.afterEvents[i]
+        if (be.key !== ae.key || be.value !== ae.value) {
+          diffIndex = i
+          break
+        }
+      }
+      this.setState({ diffIndex: diffIndex })
+
     })
   }
 
@@ -189,13 +206,13 @@ class Ladder extends Component {
   renderEvent(event, index, showWhy = false) {
     if (event.type === 'call') showWhy = false
     return (
-      <div key={ index } >
+      <div className={ this.state.diffIndex === index ? 'diff-line' : '' } key={ index }>
         <p style={{ paddingLeft: `${10 * event.indent}px` }}
           onMouseOver={ this.onMouseOver.bind(this, event.line) }
           onMouseOut={ this.onMouseOut.bind(this, event.line) }
         >
           { event.html.map((html, index) => {
-            return <span key={ index }className={ `hljs-${html.className}` }>{ html.text }</span>
+            return <span key={ index } className={ `hljs-${html.className}` }>{ html.text }</span>
           }) }
           <span id={ `why-${index}` } style={{ display: showWhy ? 'inline' : 'none' }}>
           &nbsp;

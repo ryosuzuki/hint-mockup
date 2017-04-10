@@ -55,6 +55,9 @@ class InteractiveHint extends Component {
                 beforeEvents={ this.props.beforeEvents }
                 afterEvents={ this.props.afterEvents }
 
+                beforeTraces={ this.props.beforeTraces }
+                afterTraces={ this.props.afterTraces }
+
                 beforeAst={ this.props.beforeAst }
                 afterAst={ this.props.afterAst }
 
@@ -69,6 +72,7 @@ class InteractiveHint extends Component {
                 result={ this.props.result }
                 root={ this }
               />
+              <div id="viz"></div>
 
               {/*
               <Play

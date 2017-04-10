@@ -71,8 +71,13 @@ class Ladder extends Component {
   }
 
 
-  onMouseOver(line, index) {
+  onMouseOver(event, index) {
+    let line = event.line
+    let traceIndex = event.traceIndex
     $(`.history-line.line-${index}`).addClass('hover')
+
+    if (!window.viz) this.visualize()
+    viz.renderStep(traceIndex)
 
     let popup = $('.popup')
     if (!popup.hasClass('visible')) {
@@ -80,7 +85,9 @@ class Ladder extends Component {
     }
   }
 
-  onMouseOut(line, index) {
+  onMouseOut(event, index) {
+    let line = event.line
+    let traceIndex = event.traceIndex
     $(`.history-line.line-${index}`).removeClass('hover')
 
     let popup = $('.popup')
@@ -104,7 +111,6 @@ class Ladder extends Component {
       editCodeBaseURL: 'visualize.html',
       // hideCode: true,
     }
-
     window.viz = new ExecutionVisualizer('viz', data, options);
   }
 
@@ -221,7 +227,7 @@ class Ladder extends Component {
         }
       }
       this.setState({ diffIndex: diffIndex })
-
+      this.visualize()
     })
   }
 
@@ -234,8 +240,8 @@ class Ladder extends Component {
     return (
       <div className={ className } data-index={ index } key={ index }>
         <p style={{ paddingLeft: `${10 * event.indent}px` }}
-          onMouseOver={ this.onMouseOver.bind(this, event.line, index) }
-          onMouseOut={ this.onMouseOut.bind(this, event.line, index) }
+          onMouseOver={ this.onMouseOver.bind(this, event, index) }
+          onMouseOut={ this.onMouseOut.bind(this, event, index) }
         >
           { event.html.map((html, index) => {
             return <span key={ index } className={ `hljs-${html.className}` }>{ html.text }</span>

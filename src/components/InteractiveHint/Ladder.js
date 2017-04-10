@@ -91,13 +91,18 @@ class Ladder extends Component {
     }
   }
 
-  initVisualization() {
+  initVisualization(id = 0) {
     let data = {
       code: this.props.beforeCode,
       trace: this.props.beforeTraces,
       history: this.state.beforeEvents,
       afterTrace: this.props.afterTraces,
       afterHistory: this.state.afterEvents,
+    }
+    if (id === 1) {
+      data.history = []
+      data.afterTrace = []
+      data.afterHistory = []
     }
     let options = {
       embeddedMode: true,

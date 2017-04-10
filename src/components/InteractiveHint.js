@@ -45,7 +45,7 @@ class InteractiveHint extends Component {
         $('.ladder').show()
         break
     }
-    window.ladder.initVisualization()
+    window.ladder.initVisualization(id)
   }
 
   render() {

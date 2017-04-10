@@ -29,6 +29,7 @@ let initialStore = {
   items: [],
   id: 0,
   studentId: 0,
+  description: '',
   code: '',
   before: '',
   after: '',

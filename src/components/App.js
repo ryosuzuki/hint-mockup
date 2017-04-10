@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../redux/actions'
 import Mousetrap from 'mousetrap'
+import Highlight from 'react-highlight'
 
 import ControlPanel from './ControlPanel'
 import DiffView from './HintView/DiffView'
@@ -47,6 +48,14 @@ class App extends Component {
       window.location.href = `${window.location.pathname}?type=accumulate&id=0`
       return false
     }
+
+    $.ajax({
+      method: 'GET',
+      url: `${window.location.pathname}data/${params.type}.txt`
+    })
+    .then((txt) => {
+      this.updateState({ description: txt })
+    })
 
     $.ajax({
       method: 'GET',
@@ -166,9 +175,9 @@ class App extends Component {
           </div>
           */}
           <div id="type-links" className="six wide column">
-            <a id="accumulate" className="ui basic button" href="?type=accumulate&id=0">accumulate</a>
-            <a id="product" className="ui basic button" href="?type=product&id=0">product</a>
             <a id="g" className="ui basic button" href="?type=g&id=0">g</a>
+            <a id="product" className="ui basic button" href="?type=product&id=0">product</a>
+            <a id="accumulate" className="ui basic button" href="?type=accumulate&id=0">accumulate</a>
             <a id="repeated" className="ui basic button" href="?type=repeated&id=0">repeated</a>
           </div>
           <div id="control-panel" className="eight wide column">
@@ -180,10 +189,18 @@ class App extends Component {
         </div>
         <div className="ui two column centered grid">
           <div id="mixed-hint" className="fifteen wide column">
-            <h1 className="title">Student</h1>
+            <h1 className="title">Problem</h1>
+            <div id="problem-description" className="ui message hint-message">
+              <Highlight className="python">
+                { this.props.description }
+              </Highlight>
+            </div>
+
+            <h1 className="title">Task</h1>
             <InteractiveHint
               options={ options }
               id={ this.props.id }
+              description={ this.props.description }
               code={ this.props.code }
               before={ this.props.before }
               after={ this.props.after }

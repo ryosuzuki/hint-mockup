@@ -73,11 +73,7 @@ class Ladder extends Component {
 
   onMouseOver(event, index) {
     let line = event.line
-    let traceIndex = event.traceIndex
     $(`.history-line.line-${index}`).addClass('hover')
-
-    if (!window.viz) this.visualize()
-    viz.renderStep(traceIndex)
 
     let popup = $('.popup')
     if (!popup.hasClass('visible')) {
@@ -87,7 +83,6 @@ class Ladder extends Component {
 
   onMouseOut(event, index) {
     let line = event.line
-    let traceIndex = event.traceIndex
     $(`.history-line.line-${index}`).removeClass('hover')
 
     let popup = $('.popup')
@@ -96,7 +91,7 @@ class Ladder extends Component {
     }
   }
 
-  visualize() {
+  initVisualization() {
     let data = {
       code: this.props.beforeCode,
       trace: this.props.beforeTraces,
@@ -112,8 +107,37 @@ class Ladder extends Component {
       // hideCode: true,
     }
     window.viz = new ExecutionVisualizer('viz', data, options);
+    window.viz.renderStep(5)
   }
 
+  visualize(index) {
+    if (!window.viz.renderStep) {
+      this.initVisualization()
+    }
+
+    let startIndex
+    let stopIndex
+    if (index === 0) {
+      startIndex = this.state.beforeEvents[index].traceIndex
+      stopIndex = this.state.beforeEvents[index].traceIndex
+    } else {
+      startIndex = this.state.beforeEvents[index-1].traceIndex
+      stopIndex = this.state.beforeEvents[index].traceIndex
+    }
+
+    let count = startIndex
+    const animate = () => {
+      let timer = setTimeout(animate, 100)
+      window.viz.renderStep(count)
+      count++
+      if (count > stopIndex) {
+        clearTimeout(timer)
+      }
+    }
+
+    animate()
+
+  }
 
   generate(type) {
     let events, asts, key
@@ -227,7 +251,8 @@ class Ladder extends Component {
         }
       }
       this.setState({ diffIndex: diffIndex })
-      this.visualize()
+
+      this.initVisualization()
     })
   }
 
@@ -246,10 +271,16 @@ class Ladder extends Component {
           { event.html.map((html, index) => {
             return <span key={ index } className={ `hljs-${html.className}` }>{ html.text }</span>
           }) }
+          <span id={ `why-${index}` } style={{ display: true ? 'inline' : 'none' }}>
+          &nbsp;
+          <i className="fa fa-long-arrow-right fa-fw"></i><a onClick={ this.visualize.bind(this, index) }> visualize</a>
+          </span>
+          {/*
           <span id={ `why-${index}` } style={{ display: showWhy ? 'inline' : 'none' }}>
           &nbsp;
           <i className="fa fa-long-arrow-right fa-fw"></i><a onClick={ this.onClick.bind(this, index, event.line) }> why ?</a>
           </span>
+          */}
         </p>
       </div>
     )
@@ -273,7 +304,7 @@ class Ladder extends Component {
             <Highlight className="python">
               { `${this.props.test}\n>>> ${this.props.result}` }
             </Highlight>
-            <div className="ladder">
+            <div id="result-ladder" className="ladder">
               <pre><code className="hljs">
                 { this.state.beforeEvents.map((event, index) => {
                   return this.renderEvent(event, index, true)
@@ -286,7 +317,7 @@ class Ladder extends Component {
             <Highlight className="python">
               { `${this.props.test}\n>>> ${this.props.expected}` }
             </Highlight>
-            <div className="ladder">
+            <div id="expected-ladder" className="ladder">
               <pre><code className="hljs">
                 { this.state.afterEvents.map((event, index) => {
                   return this.renderEvent(event, index, false)

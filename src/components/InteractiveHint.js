@@ -32,10 +32,33 @@ class InteractiveHint extends Component {
     // this.cm.addLineWidget(3, msg, { coverGutter: true })
   }
 
+  showCondition(id) {
+    switch (id) {
+      case 1:
+        $('.ladder').hide()
+        break
+      case 2:
+        $('.ladder').hide()
+        $('#result-ladder').show()
+        break
+      case 3:
+        $('.ladder').show()
+        break
+    }
+    window.ladder.initVisualization()
+  }
+
   render() {
     return (
       <div>
         <div className="ui message hint-message">
+
+          <div className="ui fourteen column grid">
+            <button className="ui basic button" onClick={ this.showCondition.bind(this, 1) }>Condition 1</button>
+            <button className="ui basic button" onClick={ this.showCondition.bind(this, 2) }>Condition 2</button>
+            <button className="ui basic button" onClick={ this.showCondition.bind(this, 3) }>Condition 3</button>
+          </div>
+
           <div className="ui three column grid">
             <div className="five wide column">
               <h2>Code</h2>
@@ -84,10 +107,9 @@ class InteractiveHint extends Component {
               */}
 
             </div>
-            <button className="ui basic button" onClick={ () => { $('.ladder').toggle() } }>Hide Hint</button>
           </div>
         </div>
-        <button className="ui basic button" onClick={ () => { $('#answer').toggle() } }>Hide Answer</button>
+        <button className="ui basic button" onClick={ () => { $('#answer').toggle(); window.answer.init() } }>Show Answer</button>
         <br/>
 
         <Answer

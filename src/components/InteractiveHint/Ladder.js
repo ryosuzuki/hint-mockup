@@ -151,8 +151,17 @@ class Ladder extends Component {
       key = 'afterEvents'
     }
 
+    const isEqual = (before, after) => {
+      let bool = true
+      if (!before || !after) return false
+      for (let key of ['value', 'key', 'type', 'history']) {
+        if (!_.isEqual(before[key], after[key])) bool = false
+      }
+      return bool
+    }
+
     let focusKeys = _.union(Object.keys(this.props.beforeHistory), Object.keys(this.props.afterHistory)).map((key) => {
-      if (_.isEqual(this.props.beforeHistory[key], this.props.afterHistory[key]) && this.props.beforeHistory[key].type !== 'call') return false
+      if (isEqual(this.props.beforeHistory[key], this.props.afterHistory[key])   && this.props.beforeHistory[key].type !== 'call') return false
       return key
     }).filter(key => key)
 
@@ -230,6 +239,7 @@ class Ladder extends Component {
 
     let state = {}
     let marks = {}
+    if (max > 3) max = 3
     marks[0] = 'concrete'
     marks[max] = 'abstract'
     state['max'] = max
@@ -264,17 +274,16 @@ class Ladder extends Component {
     if (this.state.diffIndex === index) className += ' diff-line'
     return (
       <div className={ className } data-index={ index } key={ index }>
-        <p style={{ paddingLeft: `${10 * event.indent}px` }}
+        <p style={{ paddingLeft: `${10 * event.indent}px` , cursor: 'pointer' }}
           onMouseOver={ this.onMouseOver.bind(this, event, index) }
           onMouseOut={ this.onMouseOut.bind(this, event, index) }
+          onClick={ this.visualize.bind(this, index) }
         >
+          { index < this.state.diffIndex ? <i className="fa fa-check fa-fw"></i> : <i className="fa fa-fw fa-angle-right"></i> }
+          &nbsp;
           { event.html.map((html, index) => {
             return <span key={ index } className={ `hljs-${html.className}` }>{ html.text }</span>
           }) }
-          <span id={ `why-${index}` } style={{ display: true ? 'inline' : 'none' }}>
-          &nbsp;
-          <i className="fa fa-long-arrow-right fa-fw"></i><a onClick={ this.visualize.bind(this, index) }> visualize</a>
-          </span>
           {/*
           <span id={ `why-${index}` } style={{ display: showWhy ? 'inline' : 'none' }}>
           &nbsp;
@@ -327,8 +336,7 @@ class Ladder extends Component {
           </div>
 
 
-          <div style={{ width: '10%'}}></div>
-          <div className="ladder" style={{ width: '80%'}}>
+          <div className="ladder" style={{ width: '50%'}}>
             <Slider
               dots
               min={ 0 }
@@ -339,7 +347,6 @@ class Ladder extends Component {
               onChange={ this.onChange.bind(this) }
             />
           </div>
-          <div style={{ width: '10%'}}></div>
 
         </div>
 

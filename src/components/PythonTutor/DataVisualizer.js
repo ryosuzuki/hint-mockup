@@ -42,9 +42,6 @@ class DataVisualizer {
                <div id="heap">
                  <div id="heapHeader">${this.getRealLabel("Objects")}</div>
                </div>
-               <div id="history">
-                 <div id="historyHeader">${this.getRealLabel("History")}</div>
-               </div>
              </td>
            </tr>
          </table>

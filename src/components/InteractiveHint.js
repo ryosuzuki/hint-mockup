@@ -95,7 +95,7 @@ class InteractiveHint extends Component {
                 result={ this.props.result }
                 root={ this }
               />
-              <div id="viz"></div>
+              <div id="viz" style={{ marginTop: '50px' }}></div>
 
               {/*
               <Play

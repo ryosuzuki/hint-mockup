@@ -117,7 +117,7 @@ class Ladder extends Component {
       // hideCode: true,
     }
     window.viz = new ExecutionVisualizer('viz', data, options);
-    window.viz.renderStep(5)
+    window.viz.renderStep(0)
   }
 
   visualize(index) {

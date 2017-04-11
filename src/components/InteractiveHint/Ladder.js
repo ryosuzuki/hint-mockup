@@ -42,12 +42,17 @@ class Ladder extends Component {
   }
 
   onChange(value) {
+    if (value > this.state.max) return false
     this.setState({ level: value }, () => {
       this.init()
     })
   }
 
   onClick(index, line, event) {
+    this.onChange(this.state.level + 1)
+    return false
+
+
     $(event.target).removeClass('primary')
     setTimeout(() => {
       let target = $(`#hoge .CodeMirror`)
@@ -272,8 +277,10 @@ class Ladder extends Component {
   }
 
 
-  renderEvent(event, index, showWhy = false) {
+  renderEvent(event, index) {
+    let showWhy = true
     if (event.type === 'call') showWhy = false
+    if (event.updates.length < 2) showWhy = false
     let className = 'history-line'
     className += ` line-${index} `
     if (this.state.diffIndex === index) className += ' diff-line'
@@ -289,12 +296,10 @@ class Ladder extends Component {
           { event.html.map((html, index) => {
             return <span key={ index } className={ `hljs-${html.className}` }>{ html.text }</span>
           }) }
-          {/*
           <span id={ `why-${index}` } style={{ display: showWhy ? 'inline' : 'none' }}>
           &nbsp;
           <i className="fa fa-long-arrow-right fa-fw"></i><a onClick={ this.onClick.bind(this, index, event.line) }> why ?</a>
           </span>
-          */}
         </p>
       </div>
     )
@@ -321,7 +326,7 @@ class Ladder extends Component {
             <div id="result-ladder" className="ladder">
               <pre><code className="hljs">
                 { this.state.beforeEvents.map((event, index) => {
-                  return this.renderEvent(event, index, true)
+                  return this.renderEvent(event, index)
                 }) }
               </code></pre>
             </div>
@@ -334,7 +339,7 @@ class Ladder extends Component {
             <div id="expected-ladder" className="ladder">
               <pre><code className="hljs">
                 { this.state.afterEvents.map((event, index) => {
-                  return this.renderEvent(event, index, false)
+                  return this.renderEvent(event, index)
                 }) }
               </code></pre>
             </div>

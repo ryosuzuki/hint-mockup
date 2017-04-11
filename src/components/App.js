@@ -189,14 +189,14 @@ class App extends Component {
         </div>
         <div className="ui two column centered grid">
           <div id="mixed-hint" className="fifteen wide column">
-            {/*
+
             <h1 className="title">Problem</h1>
             <div id="problem-description" className="ui message hint-message">
               <Highlight className="python">
                 { this.props.description }
               </Highlight>
             </div>
-            */}
+
             <h1 className="title">Task</h1>
             <InteractiveHint
               options={ options }

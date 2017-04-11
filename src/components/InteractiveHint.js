@@ -40,6 +40,7 @@ class InteractiveHint extends Component {
       case 2:
         $('.ladder').hide()
         $('#result-ladder').show()
+        $('#control-ladder').show()
         break
       case 3:
         $('.ladder').show()

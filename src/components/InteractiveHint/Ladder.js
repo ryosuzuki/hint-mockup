@@ -26,6 +26,7 @@ class Ladder extends Component {
       currentLine: null,
       diffIndex: null,
       focusKeys: [],
+      condition: 0,
     }
     window.ladder = this
   }
@@ -118,11 +119,12 @@ class Ladder extends Component {
     }
     window.viz = new ExecutionVisualizer('viz', data, options);
     window.viz.renderStep(0)
+    this.setState({ condition: id })
   }
 
   visualize(index) {
     if (!window.viz.renderStep) {
-      this.initVisualization()
+      this.initVisualization(this.state.condition)
     }
 
     let startIndex
@@ -272,7 +274,7 @@ class Ladder extends Component {
       }
       this.setState({ diffIndex: diffIndex })
 
-      this.initVisualization()
+      this.initVisualization(this.state.condition)
     })
   }
 
@@ -283,7 +285,8 @@ class Ladder extends Component {
     if (event.updates.length < 2) showWhy = false
     let className = 'history-line'
     className += ` line-${index} `
-    if (this.state.diffIndex === index) className += ' diff-line'
+    if (this.state.diffIndex === index && (this.state.condition === 0 || this.state.condition === 3))  className += ' diff-line'
+    let conditions = [0, 3]
     return (
       <div className={ className } data-index={ index } key={ index }>
         <p style={{ paddingLeft: `${10 * event.indent}px` , cursor: 'pointer' }}
@@ -291,8 +294,10 @@ class Ladder extends Component {
           onMouseOut={ this.onMouseOut.bind(this, event, index) }
           onClick={ this.visualize.bind(this, index) }
         >
-          { index < this.state.diffIndex ? <i className="fa fa-check fa-fw"></i> : <i className="fa fa-fw fa-angle-right"></i> }
+          <span style={{ display: (this.state.condition === 0 || this.state.condition === 3) ? 'inline' : 'none' }}>
+            { index < this.state.diffIndex ? <i className="fa fa-check fa-fw"></i> : <i className="fa fa-fw fa-angle-right"></i> }
           &nbsp;
+          </span>
           { event.html.map((html, index) => {
             return <span key={ index } className={ `hljs-${html.className}` }>{ html.text }</span>
           }) }
@@ -346,7 +351,7 @@ class Ladder extends Component {
           </div>
 
 
-          <div className="ladder" style={{ width: '50%'}}>
+          <div id="control-ladder" className="ladder" style={{ width: '50%'}}>
             <Slider
               dots
               min={ 0 }

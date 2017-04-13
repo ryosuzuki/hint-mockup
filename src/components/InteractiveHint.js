@@ -52,6 +52,7 @@ class InteractiveHint extends Component {
   render() {
     return (
       <div>
+        {/*
         <div className="ui message hint-message">
 
           <div className="ui fourteen column grid">
@@ -98,21 +99,19 @@ class InteractiveHint extends Component {
               />
               <div id="viz" style={{ marginTop: '50px' }}></div>
 
-              {/*
               <Play
                 traces={ this.props.traces }
                 step={ this.props.step }
                 beforeCode={ this.props.beforeCode }
                 currentCode={ this.props.currentCode }
               />
-              */}
 
             </div>
           </div>
         </div>
+        */}
         <button className="ui basic button" onClick={ () => { $('#answer').toggle(); window.answer.init() } }>Show Answer</button>
         <br/>
-
         <Answer
           options={ this.props.options }
           id={ this.props.id }
